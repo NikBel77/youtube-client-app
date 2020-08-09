@@ -11,6 +11,7 @@ import { SearchItemComponent } from './components/search-item/search-item.compon
 import { FilterComponent } from './components/filter/filter.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ColorByTimeDirective } from './directives/color-by-time.directive';
+import { FilterCardsPipe } from './pipes/filter-cards.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ColorByTimeDirective } from './directives/color-by-time.directive';
     SearchItemComponent,
     FilterComponent,
     StatisticsComponent,
-    ColorByTimeDirective
+    ColorByTimeDirective,
+    FilterCardsPipe
   ],
   imports: [
     BrowserModule,

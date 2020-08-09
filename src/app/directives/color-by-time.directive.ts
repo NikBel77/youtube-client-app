@@ -15,8 +15,8 @@ export class ColorByTimeDirective implements OnInit {
 
   constructor(private element: ElementRef) { }
 
-  public ngOnInit() {
-    const color = this.getColorByTime(new Date(this.time));
+  public ngOnInit(): void {
+    const color: string = this.getColorByTime(new Date(this.time));
     this.element.nativeElement.style.borderColor = color;
   }
 
@@ -25,7 +25,13 @@ export class ColorByTimeDirective implements OnInit {
     const sevenDays: number = new Date(0).setDate(7);
     const timeOffset: number = new Date().getTime() - time.getTime();
 
-    if (timeOffset < sevenDays ) { return this.colors.blue; } else if (timeOffset < oneMonth) { return this.colors.green; } else { return this.colors.red; }
+    if (timeOffset < sevenDays ) {
+      return this.colors.blue;
+    } else if (timeOffset < oneMonth) {
+      return this.colors.green;
+    } else {
+      return this.colors.red;
+    }
   }
 
 }
