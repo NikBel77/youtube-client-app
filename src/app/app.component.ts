@@ -14,7 +14,7 @@ export class AppComponent {
   public youtubeResponce: IResponce = tempData;
   public items: IItem[] = tempData.items;
 
-  public toggleFilterBlock() {
+  public toggleFilterBlock(): void {
     this.isFilterBlockVisible = !this.isFilterBlockVisible;
   }
 }

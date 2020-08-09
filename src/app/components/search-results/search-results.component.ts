@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IItem } from '../../models/search-item.model'
+import { IItem } from '../../models/search-item.model';
 
 @Component({
   selector: 'app-search-results',
@@ -8,7 +8,7 @@ import { IItem } from '../../models/search-item.model'
 })
 export class SearchResultsComponent {
 
-  @Input() items: IItem[];
+  @Input() public items: IItem[];
 
   constructor() { }
 

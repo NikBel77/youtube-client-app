@@ -7,19 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  @Input() icon: string;
-  @Input() value: string;
+  @Input() public icon: string;
+  @Input() public value: string;
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.value = this.convertValue(this.value);
   }
 
-  convertValue(value: string) {
+  public convertValue(value: string) {
     const [m, k] = [1000000, 1000];
-    if(+value > m) return Math.floor(+value / m) + 'M';
-    else if(+value > k) return Math.floor(+value / k) + 'K';
+    if (+value > m) { return Math.floor(+value / m) + 'M'; } else if (+value > k) { return Math.floor(+value / k) + 'K'; }
     return value;
   }
 

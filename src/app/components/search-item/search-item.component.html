@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [appColorByTime]="item.snippet.publishedAt">
     <div>
         <img [src]="item.snippet.thumbnails.medium.url" class="card__thumbnail" alt="thumbnail">
 
@@ -16,6 +16,4 @@
     </div>
 
     <button mat-raised-button color="primary" id="more-btn">more...</button>
-
-    <div class="card__underline"></div>
 </div>

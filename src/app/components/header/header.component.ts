@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
 
-  @Output() public toggleFilterBlock = new EventEmitter();
+  @Output() public toggleFilterBlock: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 

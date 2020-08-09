@@ -10,6 +10,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ColorByTimeDirective } from './directives/color-by-time.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     SearchResultsComponent,
     SearchItemComponent,
     FilterComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ColorByTimeDirective
   ],
   imports: [
     BrowserModule,
