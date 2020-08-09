@@ -1,16 +1,24 @@
 <header>
     <div class="control-panel">
+
         <div class="search">
+
             <img class="search__logo" src="../../../assets/icons/logo.svg">
             <div class="search__panel">
-                <input id="main-search-input"/>
+                <input id="main-search-input" placeholder="What are you want to find out?"/>
                 <button color="primary" mat-raised-button id="main-search-btn">search</button>
-                <button color="warn" mat-raised-button id="setting-btn">btn</button>
+                <button color="primary" mat-raised-button id="setting-btn" (click)="toggleFilterBlock.emit()">
+                    <img src="../../../assets/icons/set.svg">
+                </button>
             </div>
+
         </div>
+
         <div class="user">
+
             <span>your name</span>
-            <button color="accent" mat-raised-button>btn</button>
+            <img src="../../../assets/icons/user.svg" id="user-btn">
+            
         </div>
     </div>
 </header>

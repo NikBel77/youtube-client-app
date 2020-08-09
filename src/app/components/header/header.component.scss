@@ -4,9 +4,9 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 2fr .5fr;
-    grid-template-areas: "search user";
-    padding: 16px 0 16px 0;
+    grid-template-columns: .5fr 2fr .5fr;
+    grid-template-areas: ". search user";
+    padding: 14px 0 14px 0;
     background-color: $background-color;
 }
 
@@ -27,8 +27,9 @@
             border: none;
             border-bottom-left-radius: 5px;
             border-top-left-radius: 5px;
-            min-width: 240px;
+            min-width: 280px;
             padding-left: 10px;
+            font-size: 12px;
             background-color: $background-light-color;
         }
 
@@ -42,6 +43,8 @@
         #setting-btn {
             line-height: 100%;
             margin-left: 20px;
+            padding: 0;
+            min-width: 26px;
         }
     }
 
@@ -55,4 +58,10 @@
     display: flex;
     align-items: center;
     justify-content: right;
+
+    #user-btn {
+        background-color: white;
+        border-radius: 30%;
+        margin-left: 10px;
+    }
 }
