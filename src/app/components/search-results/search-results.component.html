@@ -1,5 +1,7 @@
 <div class="container">
     <div class="search-result">
-        <app-search-item *ngFor="let item of items" [item]="item"></app-search-item>
+        <ng-template ngFor let-item [ngForOf]="items">
+            <app-search-item [item]="item"></app-search-item>
+        </ng-template>
     </div>
 </div>

@@ -4,7 +4,12 @@ export interface IFilterSettings {
     filterBy: filters;
 }
 
-export enum filters {
-    view = 'VIEW',
-    date = 'DATE',
-}
+export interface IFilters { [key: string]: filters; }
+
+export type filters = ('NONE' |'VIEW' | 'DATE');
+
+export const filtersMap: IFilters = {
+    date: 'DATE',
+    view: 'VIEW',
+    empty: 'NONE',
+};

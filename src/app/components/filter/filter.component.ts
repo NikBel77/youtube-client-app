@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { IFilterSettings, filters } from 'src/app/models/filter-settings.model';
+import { IFilterSettings, filtersMap, IFilters, filters } from 'src/app/models/filter-settings.model';
 
 @Component({
   selector: 'app-filter',
@@ -11,8 +11,7 @@ export class FilterComponent {
 
   @Output() public setFilterSettings: EventEmitter<IFilterSettings> = new EventEmitter();
   @Input() public filterSettings: IFilterSettings;
-  public filterDate: string = filters.date;
-  public filterView: string = filters.view;
+  public filtersMap: IFilters = filtersMap;
 
   constructor() { }
 
@@ -26,9 +25,14 @@ export class FilterComponent {
     this.setFilterSettings.emit(newSettings);
   }
 
-  public changeKeyWord(keyWord: string): void {
-    if (!keyWord.trim()) { return; }
-    const newSettings: IFilterSettings = { ...this.filterSettings, keyWord: keyWord.trim() };
+  public changeKeyWord(element: HTMLInputElement): void {
+    if(!element) return;
+
+    const keyWord: string = element.value.trim();
+    element.value = '';
+    element.placeholder = keyWord;
+    
+    const newSettings: IFilterSettings = { ...this.filterSettings, keyWord };
     this.setFilterSettings.emit(newSettings);
   }
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import tempData from './temporaryData';
 import { IItem } from './models/search-item.model';
 import { IResponce } from './models/search-response.model';
-import { IFilterSettings, filters } from './models/filter-settings.model';
+import { IFilterSettings, filtersMap } from './models/filter-settings.model';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
   public filterSettings: IFilterSettings = {
     keyWord: '',
     isReverse: false,
-    filterBy: filters.date,
+    filterBy: filtersMap.empty,
   };
 
   public toggleFilterBlock(): void {

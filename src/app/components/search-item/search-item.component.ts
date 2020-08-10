@@ -13,17 +13,23 @@ export class SearchItemComponent implements OnInit {
 
   public statisticsMap: Array<{ icon: string, value: string }>;
   public title: string;
+  // below is for debug
+  public debugDate: string;
+  // -----------------
 
   constructor() { }
 
   public ngOnInit(): void {
+    if (!this.item) { return; }
     this.statisticsMap = [
-      { icon: 'visibility', value: this.item.statistics.viewCount },
-      { icon: 'thumb_up_alt', value: this.item.statistics.likeCount },
-      { icon: 'thumb_down_alt', value: this.item.statistics.dislikeCount },
-      { icon: 'mode_comment', value: this.item.statistics.commentCount },
+      { icon: 'visibility', value: this.item?.statistics?.viewCount },
+      { icon: 'thumb_up_alt', value: this.item?.statistics?.likeCount },
+      { icon: 'thumb_down_alt', value: this.item?.statistics?.dislikeCount },
+      { icon: 'mode_comment', value: this.item?.statistics?.commentCount },
     ];
-    this.title = this.checkTitle(this.item.snippet.title);
+    this.title = this.checkTitle(this.item?.snippet?.title);
+
+    this.debugDate = new Date(this.item.snippet.publishedAt).toLocaleDateString();
   }
 
   public checkTitle(title: string): string {

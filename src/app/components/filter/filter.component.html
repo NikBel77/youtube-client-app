@@ -1,9 +1,9 @@
 <div class="filter">
     <div class="filter__panel">
         <span>Sorting by:</span>
-        <span class="filter__criterion" (click)="changeFilter(filterDate)">date</span>
-        <span class="filter__criterion" (click)="changeFilter(filterView)">count of views</span>
-        <span class="filter__criterion" (click)="changeKeyWord(this.input.value)">by word sentence</span>
+        <span class="filter__criterion" (click)="changeFilter(filtersMap.date)">date</span>
+        <span class="filter__criterion" (click)="changeFilter(filtersMap.view)">count of views</span>
+        <span class="filter__criterion" (click)="changeKeyWord(this.input)">by word sentence</span>
         <input id="filter-input" #input/>
     </div>
 </div>
