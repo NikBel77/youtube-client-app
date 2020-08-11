@@ -7,7 +7,10 @@
             <div class="search__panel">
                 <input id="main-search-input" placeholder="What are you want to find out?"/>
                 <button color="primary" mat-raised-button id="main-search-btn">search</button>
-                <button color="primary" mat-raised-button id="setting-btn" (click)="toggleFilterBlock.emit()">
+                <button
+                    color="primary"
+                    mat-raised-button id="setting-btn"
+                    (click)="isFilterBlockVisible = !isFilterBlockVisible">
                     <img src="../../../assets/icons/set.svg">
                 </button>
             </div>
@@ -17,8 +20,12 @@
         <div class="user">
 
             <span>your name</span>
-            <img src="../../../assets/icons/user.svg" id="user-btn">
+            <button color="primary" mat-raised-button id="user-btn">
+                <mat-icon>account_box</mat-icon>
+            </button>
             
         </div>
     </div>
 </header>
+
+<app-filter *ngIf="isFilterBlockVisible"></app-filter>

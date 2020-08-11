@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +7,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
 
-  @Output() public toggleFilterBlock: EventEmitter<void> = new EventEmitter();
+  // true for dev, change on fasle when build app
+  public isFilterBlockVisible: boolean = true;
 
   constructor() { }
 

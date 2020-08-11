@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IItem } from '../../models/search-item.model';
-import { CardsColectionService } from '../../services/cards-colection.service';
-import { IFilterSettings } from '../../models/filter-settings.model';
-import { FilterSettingsService } from 'src/app/services/filter-settings.service';
+import { IItem } from '../../../shared/models/search-item.model';
+import { CardsCollectionService } from '../../../core/services/card-collection-service/cards-collection.service';
+import { IFilterSettings } from '../../../shared/models/filter-settings.model';
+import { FilterSettingsService } from 'src/app/core/services/filter-settings-service/filter-settings.service';
 
 @Component({
   selector: 'app-search-results',
@@ -16,12 +16,12 @@ export class SearchResultsComponent implements OnInit {
   public filterSettings: IFilterSettings;
 
   constructor(
-    private cardsColectionService: CardsColectionService,
+    private cardsCollectionService: CardsCollectionService,
     private filterSettingsService: FilterSettingsService
   ) { }
 
   public ngOnInit(): void {
-    this.items = this.cardsColectionService.getCards();
+    this.items = this.cardsCollectionService.getCards();
     this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.filterSettings = filterSettings);
   }

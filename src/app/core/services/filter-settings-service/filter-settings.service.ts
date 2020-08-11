@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IFilterSettings, filters, IFilters } from '../models/filter-settings.model';
+import { IFilterSettings, filters, IFilters } from '../../../shared/models/filter-settings.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({

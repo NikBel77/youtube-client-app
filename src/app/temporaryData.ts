@@ -1,4 +1,4 @@
-import { IResponce } from './models/search-response.model';
+import { IResponce } from './shared/models/search-response.model';
 
 const tempData: IResponce = {
     'kind': 'youtube#videoListResponse',

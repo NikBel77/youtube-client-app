@@ -1,4 +1,4 @@
-@import '../../../themes/variables.scss';
+@import '../../../../themes/variables.scss';
 
 .control-panel {
     width: 100%;
@@ -60,8 +60,10 @@
     justify-content: right;
 
     #user-btn {
-        background-color: white;
-        border-radius: 30%;
         margin-left: 10px;
+        padding: 2px;
+        min-width: 0;
+        line-height: 0;
+
     }
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IItem } from '../models/search-item.model';
-import { IResponce } from '../models/search-response.model';
-import tempData from '../temporaryData';
+import { IItem } from '../../../shared/models/search-item.model';
+import { IResponce } from '../../../shared/models/search-response.model';
+import tempData from '../../../temporaryData';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardsColectionService {
+export class CardsCollectionService {
 
   private responce: IResponce = tempData;
 

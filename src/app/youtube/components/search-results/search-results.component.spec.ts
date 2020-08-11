@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FilterCardsPipe } from '../../pipes/filter-cards.pipe';
+import { FilterCardsPipe } from '../../../shared/pipes/filter-cards.pipe';
 import { SearchResultsComponent } from './search-results.component';
 
 describe('SearchResultsComponent', () => {
