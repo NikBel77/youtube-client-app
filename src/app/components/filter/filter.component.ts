@@ -1,39 +1,32 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { IFilterSettings, filtersMap, IFilters, filters } from 'src/app/models/filter-settings.model';
+import { Component, OnInit } from '@angular/core';
+import { FilterSettingsService } from 'src/app/services/filter-settings.service';
+import { IFilters, filters } from 'src/app/models/filter-settings.model';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
+export class FilterComponent implements OnInit {
 
-export class FilterComponent {
+  public filtersMap: IFilters;
 
-  @Output() public setFilterSettings: EventEmitter<IFilterSettings> = new EventEmitter();
-  @Input() public filterSettings: IFilterSettings;
-  public filtersMap: IFilters = filtersMap;
+  constructor(private filterSettingsService: FilterSettingsService) { }
 
-  constructor() { }
-
-  public changeFilter(filterBy: filters): void {
-    let newSettings: IFilterSettings;
-    if (this.filterSettings.filterBy === filterBy) {
-      newSettings = { ...this.filterSettings, filterBy, isReverse: !this.filterSettings.isReverse };
-    } else {
-      newSettings = { ...this.filterSettings, filterBy, isReverse: false };
-    }
-    this.setFilterSettings.emit(newSettings);
+  public ngOnInit(): void {
+    this.filtersMap = this.filterSettingsService.getFiltersMap();
   }
 
-  public changeKeyWord(element: HTMLInputElement): void {
-    if(!element) return;
+  public setFilter(filter: filters): void {
+    this.filterSettingsService.changeFilter(filter);
+  }
 
-    const keyWord: string = element.value.trim();
-    element.value = '';
-    element.placeholder = keyWord;
-    
-    const newSettings: IFilterSettings = { ...this.filterSettings, keyWord };
-    this.setFilterSettings.emit(newSettings);
+  public setKeyWord(input: HTMLInputElement): void {
+    const keyWord: string = input.value.trim().toLocaleLowerCase();
+    input.placeholder = keyWord;
+    input.value = '';
+
+    this.filterSettingsService.changeKeyWord(keyWord);
   }
 
 }

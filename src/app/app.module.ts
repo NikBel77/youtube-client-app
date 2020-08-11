@@ -12,6 +12,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ColorByTimeDirective } from './directives/color-by-time.directive';
 import { FilterCardsPipe } from './pipes/filter-cards.pipe';
+import { CardsColectionService } from './services/cards-colection.service';
+import { FilterSettingsService } from './services/filter-settings.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { FilterCardsPipe } from './pipes/filter-cards.pipe';
     FilterComponent,
     StatisticsComponent,
     ColorByTimeDirective,
-    FilterCardsPipe
+    FilterCardsPipe,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,10 @@ import { FilterCardsPipe } from './pipes/filter-cards.pipe';
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    CardsColectionService,
+    FilterSettingsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

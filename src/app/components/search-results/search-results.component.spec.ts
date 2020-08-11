@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FilterCardsPipe } from '../../pipes/filter-cards.pipe';
 import { SearchResultsComponent } from './search-results.component';
 
 describe('SearchResultsComponent', () => {
@@ -8,7 +8,10 @@ describe('SearchResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchResultsComponent ]
+      declarations: [
+        SearchResultsComponent,
+        FilterCardsPipe
+      ]
     })
     .compileComponents();
   }));

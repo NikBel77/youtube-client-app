@@ -1,7 +1,3 @@
 <app-header (toggleFilterBlock)="toggleFilterBlock()"></app-header>
-<app-filter
-    *ngIf="isFilterBlockVisible"
-    [filterSettings]="filterSettings"
-    (setFilterSettings)="handleNewFilterSettings($event)">
-</app-filter>
-<app-search-results [items]="items | filterCards: filterSettings"></app-search-results>
+<app-filter *ngIf="isFilterBlockVisible"></app-filter>
+<app-search-results></app-search-results>

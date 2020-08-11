@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IItem } from '../models/search-item.model';
-import { IFilterSettings, filtersMap } from '../models/filter-settings.model';
+import { IFilterSettings } from '../models/filter-settings.model';
 
 @Pipe({
   name: 'filterCards'
@@ -58,11 +58,11 @@ export class FilterCardsPipe implements PipeTransform {
     let filteredCards: IItem[];
 
     switch (settings.filterBy) {
-      case filtersMap.date: {
+      case 'DATE': {
         filteredCards = this.filterByDate(cards, settings.isReverse);
         break;
       }
-      case filtersMap.view: {
+      case 'VIEW': {
         filteredCards = this.fiterByViews(cards, settings.isReverse);
         break;
       }
