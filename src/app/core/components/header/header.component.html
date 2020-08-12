@@ -3,7 +3,10 @@
 
         <div class="search">
 
-            <img class="search__logo" src="../../../assets/icons/logo.svg">
+            <img
+                (click)="goToHome()"
+                class="search__logo" src="../../../assets/icons/logo.svg">
+
             <div class="search__panel">
                 <input id="main-search-input" placeholder="What are you want to find out?"/>
                 <button color="primary" mat-raised-button id="main-search-btn">search</button>
@@ -19,9 +22,25 @@
 
         <div class="user">
 
-            <span>your name</span>
-            <button color="primary" mat-raised-button id="user-btn">
+            <span
+                class="user__name"
+                *ngIf="!!activeUserName">
+                {{ activeUserName.name }}
+            </span>
+            <button 
+                color="primary"
+                mat-raised-button
+                id="user-btn"
+                (click)="goToAuth()">
                 <mat-icon>account_box</mat-icon>
+            </button>
+            <button 
+                *ngIf="!!activeUserName"
+                color="primary"
+                mat-button
+                id="logout-btn"
+                (click)="logOut()">
+                Log out
             </button>
             
         </div>
