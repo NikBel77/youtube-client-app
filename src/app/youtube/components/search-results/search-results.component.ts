@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IItem } from '../../../shared/models/search-item.model';
-import { CardsCollectionService } from '../../../core/services/card-collection-service/cards-collection.service';
+import { CardsCollectionService } from '../../../core/services/cards-collection.service';
 import { IFilterSettings } from '../../../shared/models/filter-settings.model';
-import { FilterSettingsService } from 'src/app/core/services/filter-settings-service/filter-settings.service';
+import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 
 @Component({
   selector: 'app-search-results',

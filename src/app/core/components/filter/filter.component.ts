@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterSettingsService } from 'src/app/core/services/filter-settings-service/filter-settings.service';
+import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 import { IFilters, filters } from 'src/app/shared/models/filter-settings.model';
 
 @Component({

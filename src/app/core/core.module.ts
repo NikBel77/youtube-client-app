@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardsCollectionService } from './services/card-collection-service/cards-collection.service';
-import { FilterSettingsService } from './services/filter-settings-service/filter-settings.service';
+import { CardsCollectionService } from './services/cards-collection.service';
+import { FilterSettingsService } from './services/filter-settings.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';

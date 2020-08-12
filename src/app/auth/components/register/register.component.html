@@ -1,0 +1,36 @@
+<div class="register">
+    <h4>Registration</h4>
+
+    <form class="register__form">
+        <div class="register__fild">
+            <label>First name</label>
+            <input type="text" #regFirstName>
+        </div>
+
+        <div class="register__fild">
+            <label>Last name</label>
+            <input type="text" #regLastName>
+        </div>
+
+        <div class="register__fild">
+            <label>mail</label>
+            <input type="email" #regMail>
+        </div>
+
+        <div class="register__fild">
+            <label>password</label>
+            <input type="password" #regPassword>
+        </div>
+    </form>
+
+    <div class="register__controls">
+        <button mat-button color="primary" routerLink='../'>Login</button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="handleRegister(regFirstName.value, regLastName.value, regMail.value, regPassword.value)">
+            Registration
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+@import '../../../../themes/variables.scss';
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.sing-in {
+    border-radius: 10px;
+    min-width: 240px;
+    min-height: 100px;
+    padding: 10px 20px;
+    background-color: $background-color;
+}
