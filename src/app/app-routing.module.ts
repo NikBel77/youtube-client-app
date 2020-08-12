@@ -8,7 +8,8 @@ import { RegisterComponent } from './auth/components/register/register.component
 import { LoginComponent } from './auth/components/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: SearchResultsComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'home', component: SearchResultsComponent, canActivate: [AuthGuard] },
   {
     path: 'auth',
     component: SingInComponent,
@@ -17,7 +18,7 @@ const routes: Routes = [
       { path: 'reg', component: RegisterComponent }
     ]
   },
-  { path: '**', component: NotFoundComponent, canActivate: [AuthGuard] }
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

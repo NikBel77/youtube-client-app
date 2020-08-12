@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
   }
 
   public handleLogin(name: string, pasword: string): void {
-    this.loginService.loginAs(name, pasword);
+    const isLogin: boolean = this.loginService.tryLogin(name, pasword);
+
+    //dev
+    console.log(isLogin);
   }
 
 }
