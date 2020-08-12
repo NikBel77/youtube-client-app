@@ -7,12 +7,7 @@ export class RegisterService {
 
   constructor() { }
 
-  public register(
-    firstName: string,
-    lastName: string,
-    password: string,
-    email: string
-    ) {
-    console.log(`register: ${firstName} ${lastName} mail: ${email}, pas: ${password}`);
+  public register(): void {
+
   }
 }

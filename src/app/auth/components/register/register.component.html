@@ -3,23 +3,18 @@
 
     <form class="register__form">
         <div class="register__fild">
-            <label>First name</label>
-            <input type="text" #regFirstName>
-        </div>
-
-        <div class="register__fild">
-            <label>Last name</label>
-            <input type="text" #regLastName>
+            <label>login</label>
+            <input type="text" #regFirstName [appWarningBorder]="'LOGIN'">
         </div>
 
         <div class="register__fild">
             <label>mail</label>
-            <input type="email" #regMail>
+            <input type="email" #regMail [appWarningBorder]="'EMAIL'">
         </div>
 
         <div class="register__fild">
             <label>password</label>
-            <input type="password" #regPassword>
+            <input type="password" #regPassword [appWarningBorder]="'PSW'">
         </div>
     </form>
 
@@ -28,7 +23,7 @@
         <button
             mat-raised-button
             color="primary"
-            (click)="handleRegister(regFirstName.value, regLastName.value, regMail.value, regPassword.value)">
+            (click)="handleRegister(regFirstName, regMail, regPassword)">
             Registration
         </button>
     </div>

@@ -9,7 +9,7 @@ import { LoginComponent } from './auth/components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: SearchResultsComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-  { 
+  {
     path: 'auth',
     component: SingInComponent,
     children: [

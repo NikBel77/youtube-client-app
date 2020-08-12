@@ -5,8 +5,8 @@ import { CanActivate } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  canActivate(): boolean {
+  public canActivate(): boolean {
       return true;
   }
-  
+
 }

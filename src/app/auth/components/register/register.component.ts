@@ -10,11 +10,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(private registerService: RegisterService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  public handleRegister(firstName: string, lastName: string, email: string, pasword: string) {
-    this.registerService.register(firstName, lastName, pasword, email);
+  public handleRegister(...elements: HTMLInputElement[]): void {
+
   }
 
 }

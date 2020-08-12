@@ -9,13 +9,14 @@ import { RegisterService } from './services/register.service';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
-
+import { WarningBorderDirective } from './directives/warning-border.directive';
 
 @NgModule({
   declarations: [
     SingInComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WarningBorderDirective
   ],
   providers: [
     LoginService,
