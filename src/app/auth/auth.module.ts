@@ -4,7 +4,6 @@ import { SingInComponent } from './components/sing-in/sing-in.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginService } from './services/login.service';
-import { RegisterService } from './services/register.service';
 
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
@@ -20,7 +19,6 @@ import { WarningBorderDirective } from './directives/warning-border.directive';
   ],
   providers: [
     LoginService,
-    RegisterService
   ],
   imports: [
     CommonModule,

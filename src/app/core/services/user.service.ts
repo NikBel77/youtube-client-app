@@ -53,6 +53,9 @@ export class UserService {
       window.localStorage.setItem('users', JSON.stringify([user]));
       return true;
     } else {
+      if(!!users.find(user => user.name === name)) {
+        return false
+      }
       users.push(user);
       window.localStorage.setItem('users', JSON.stringify(users));
       return true

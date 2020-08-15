@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../../services/register.service';
+import { LoginService } from '../../services/login.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { RegisterService } from '../../services/register.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private loginService: LoginService) { }
 
   public ngOnInit(): void {
   }
@@ -25,10 +25,9 @@ export class RegisterComponent implements OnInit {
 
     [name, email, psw] = elements.map(input => input.value);
     if(isAllowed) {
-      const isReg: boolean = this.registerService.register(name, email, psw);
-
-      //dev
-      console.log(isReg);
+      this.loginService.register(name, email, psw);
+    } else {
+      this.loginService.openSnackBar('all fields must be filled');
     }
   }
 
