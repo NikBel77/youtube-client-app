@@ -1,0 +1,31 @@
+<div class="detail">
+
+    <button mat-raised-button color="primary" id="back-btn" (click)="goBack()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+
+    <div class="detail__card">
+
+        <div class="detail__banner">
+            <img [src]="item.snippet.thumbnails.maxres.url" alt="banner">
+        </div>
+
+        <div class="detail__info" [appColorByTime]="item.snippet.publishedAt">
+            <div class="detail__title">
+                <h3>{{ item.snippet.title }}</h3>
+                <span class="detail__time">{{ publishTime.toDateString() }}</span>
+            </div>
+
+            <div class="detail__description">
+                <h5>Description:</h5>
+                <p>{{ item.snippet.description }}</p>
+            </div>
+
+            <div class="detail__statistics">
+                <app-statistics *ngFor="let stat of statisticsMap" [value]="stat.value" [icon]="stat.icon">
+                </app-statistics>
+            </div>
+        </div>
+
+    </div>
+</div>

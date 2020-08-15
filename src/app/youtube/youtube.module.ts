@@ -7,12 +7,13 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
-
+import { DetailComponent } from './components/detail/detail.component';
 @NgModule({
   declarations: [
     SearchResultsComponent,
     SearchItemComponent,
     StatisticsComponent,
+    DetailComponent,
   ],
   imports: [
     MaterialModule,

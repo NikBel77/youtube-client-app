@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IItem } from 'src/app/shared/models/search-item.model';
+import { Statistics } from '../../models/statistics.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-item',
@@ -11,21 +13,22 @@ export class SearchItemComponent implements OnInit {
 
   @Input() public item: IItem;
 
-  public statisticsMap: Array<{ icon: string, value: string }>;
+  public statisticsMap: Statistics[];
   public title: string;
+
   // below is for debug
   public debugDate: string;
   // -----------------
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public ngOnInit(): void {
     if (!this.item) { return; }
     this.statisticsMap = [
-      { icon: 'visibility', value: this.item?.statistics?.viewCount },
-      { icon: 'thumb_up_alt', value: this.item?.statistics?.likeCount },
-      { icon: 'thumb_down_alt', value: this.item?.statistics?.dislikeCount },
-      { icon: 'mode_comment', value: this.item?.statistics?.commentCount },
+      new Statistics('visibility', this.item?.statistics?.viewCount),
+      new Statistics('thumb_up_alt', this.item?.statistics?.likeCount),
+      new Statistics('thumb_down_alt', this.item?.statistics?.dislikeCount),
+      new Statistics('mode_comment', this.item?.statistics?.commentCount),
     ];
     this.title = this.checkTitle(this.item?.snippet?.title);
 
@@ -37,6 +40,10 @@ export class SearchItemComponent implements OnInit {
       return title.slice(0, this.MAX_TITLE_LEN) + '...';
     }
     return title;
+  }
+
+  public goToDetail(): void {
+    this.router.navigate(['detail', this.item.id])
   }
 
 }

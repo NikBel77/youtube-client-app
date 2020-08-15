@@ -6,10 +6,12 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { SingInComponent } from './auth/components/sing-in/sing-in.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { LoginComponent } from './auth/components/login/login.component';
+import { DetailComponent } from './youtube/components/detail/detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: SearchResultsComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:id', component: DetailComponent, canActivate: [AuthGuard] },
   {
     path: 'auth',
     component: SingInComponent,

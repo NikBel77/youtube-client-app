@@ -18,4 +18,8 @@ export class CardsCollectionService {
       return this.cards;
   }
 
+  public findById(id: string): IItem | null {
+    return this.cards.find(card => card.id === id) || null;
+  }
+
 }
