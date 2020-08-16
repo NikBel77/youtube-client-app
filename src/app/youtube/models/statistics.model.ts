@@ -1,6 +1,6 @@
 export class Statistics {
-    icon: string;
-    value: string;
+    public icon: string;
+    public value: string;
 
     constructor(icon: string, value: string) {
         this.icon = icon;

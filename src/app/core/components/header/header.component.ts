@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private userServise: UserService, private router: Router) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userServise.getUserObservable()
       .subscribe(newUser => {
         this.activeUserName = newUser;

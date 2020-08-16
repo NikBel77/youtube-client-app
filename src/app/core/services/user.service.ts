@@ -16,10 +16,10 @@ export class UserService {
   }
 
   private getUsersFromLocalStorage(): User[] | null {
-    if(!window.localStorage.length) return null
+    if (!window.localStorage.length) { return null; }
 
     const usersFromLS: string = window.localStorage.getItem('users');
-    if(!usersFromLS) return null;
+    if (!usersFromLS) { return null; }
     return JSON.parse(usersFromLS);
   }
 
@@ -28,57 +28,57 @@ export class UserService {
   }
 
   private tryLoginFromSession(): boolean {
-    if(!window.sessionStorage.length) return false;
+    if (!window.sessionStorage.length) { return false; }
     const user: User = JSON.parse(window.sessionStorage.getItem('user'));
-    if(!user.name || !user.password) return false;
+    if (!user.name || !user.password) { return false; }
 
     let isLogin: boolean;
     isLogin = this.loginUser(user.name, user.password);
-    return isLogin
+    return isLogin;
   }
 
-  public logOut() {
+  public logOut(): void {
     window.sessionStorage.clear();
     this.userSubject.next(null);
     this.user = null;
   }
 
   public saveUserToLocalStorage(name: string, email: string, psw: string): boolean {
-    if(!name || !email || !psw) return false;
+    if (!name || !email || !psw) { return false; }
 
     const user: User = new User(name, email, psw);
     const users: User[] | null = this.getUsersFromLocalStorage();
-    
-    if(!users) {
+
+    if (!users) {
       window.localStorage.setItem('users', JSON.stringify([user]));
       return true;
     } else {
-      if(!!users.find(user => user.name === name)) {
-        return false
+      if (!!users.find(userData => userData.name === name)) {
+        return false;
       }
       users.push(user);
       window.localStorage.setItem('users', JSON.stringify(users));
-      return true
+      return true;
     }
   }
 
   public loginUser(name: string, password: string): boolean {
     const users: User[] = this.getUsersFromLocalStorage();
-    if(!users) return false;
+    if (!users) { return false; }
 
-    const currentUser = users.find((user) => user.name === name);
-    if(!currentUser) return false;
-    if(currentUser.password !== password) return false;
+    const currentUser: User | undefined = users.find((user) => user.name === name);
+    if (!currentUser) { return false; }
+    if (currentUser.password !== password) { return false; }
 
     this.saveSession(currentUser);
 
     this.user = currentUser;
     this.userSubject.next(currentUser);
 
-    return true
+    return true;
   }
 
-  public isLogin(): boolean { 
+  public isLogin(): boolean {
     return !!this.user;
   }
 

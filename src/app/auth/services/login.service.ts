@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '../../core/services/user.service'
+import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -13,15 +13,15 @@ export class LoginService {
     private router: Router,
     private snackBar: MatSnackBar) { }
 
-  public openSnackBar(massage: string) {
+  public openSnackBar(massage: string): void {
     this.snackBar.open(massage, '', {
       duration: 2000
-    })
+    });
   }
 
   public tryLogin(name: string, psw: string): void {
     const isLogin: boolean = this.userService.loginUser(name, psw);
-    if(!isLogin) {
+    if (!isLogin) {
       this.openSnackBar('incorrect name or password');
     } else {
       this.openSnackBar(`loign as ${name}`);
@@ -30,8 +30,8 @@ export class LoginService {
   }
 
   public register(name: string, email: string, psw: string): void {
-    const isRegister = this.userService.saveUserToLocalStorage(name, email, psw);
-    if(!isRegister) {
+    const isRegister: boolean = this.userService.saveUserToLocalStorage(name, email, psw);
+    if (!isRegister) {
       this.openSnackBar(`user: ${name} has alredy registered`);
     } else {
       this.openSnackBar(`user ${name} registered`);

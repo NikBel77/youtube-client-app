@@ -43,7 +43,7 @@ export class SearchItemComponent implements OnInit {
   }
 
   public goToDetail(): void {
-    this.router.navigate(['detail', this.item.id])
+    this.router.navigate(['detail', this.item.id]);
   }
 
 }

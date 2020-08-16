@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -24,7 +23,7 @@ export class RegisterComponent implements OnInit {
       .every(color => color === 'green');
 
     [name, email, psw] = elements.map(input => input.value);
-    if(isAllowed) {
+    if (isAllowed) {
       this.loginService.register(name, email, psw);
     } else {
       this.loginService.openSnackBar('all fields must be filled');

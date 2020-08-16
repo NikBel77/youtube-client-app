@@ -24,15 +24,15 @@ export class DetailComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
     const item: IItem = this.cardsCollectionService.findById(this.id);
-    if(!item) {
+    if (!item) {
       this.router.navigate(['404']);
     } else {
       this.item = item;
-      this.publishTime = new Date(this.item.snippet.publishedAt);
-      
+      this.publishTime = new Date(this.item?.snippet?.publishedAt);
+
       this.statisticsMap = [
         new Statistics('visibility', this.item?.statistics?.viewCount),
         new Statistics('thumb_up_alt', this.item?.statistics?.likeCount),
@@ -44,6 +44,10 @@ export class DetailComponent implements OnInit {
 
   public goBack(): void {
     this.location.back();
+  }
+
+  public handleLoadError(img: HTMLImageElement): void {
+    img.parentElement.remove();
   }
 
 }
