@@ -4,4 +4,10 @@
             <app-search-item [item]="item"></app-search-item>
         </ng-template>
     </div>
+
+    <div *ngIf="items.length" class="more-button">
+        <button mat-button color="warn" (click)="loadMore()">
+            Load more videos
+        </button>
+    </div>
 </div>

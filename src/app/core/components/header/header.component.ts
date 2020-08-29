@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 import { YoutubeApiService } from '../../services/youtube-api.service';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
 import { CardsCollectionService } from '../../services/cards-collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,6 +30,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private cardsCollectionService: CardsCollectionService,
     private snackBar: MatSnackBar) {}
 
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.snackBar.open(`fail to load from youtube: code ${error.status}`, 'close', {
+      duration: 5000
+    });
+  }
+
   public ngOnInit(): void {
     this.userServise.getUserStream()
       .subscribe(newUser => {
@@ -38,7 +44,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    const delayMS: number = 700;
     const input: HTMLInputElement = this.mainInput.nativeElement;
 
     const inputStream$: Observable<string> = new Observable((observer) => {
@@ -48,13 +53,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     inputStream$
       .pipe(
         filter(value => !!value.trim()),
-        debounceTime(delayMS),
+        debounceTime(700),
         distinctUntilChanged(),
         tap(() => console.log('loading')),
         switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)
           .pipe(
             catchError(error => {
-              this.handleHttpError(error)
+              this.handleHttpError(error);
               return [];
             })
           )),
@@ -62,19 +67,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       )
       .subscribe(
         (items) => {
-          if(items.length) {
-            this.cardsCollectionService.setNewCardsStore(items)
+          if (items.length) {
+            this.cardsCollectionService.addNewItemsToStore(items);
           }
         }
       );
-  }
-
-  private handleHttpError(error: HttpErrorResponse): void {
-    let errorMessage: string = `fail to load from youtube: code ${error.status}`;
-
-    this.snackBar.open(errorMessage, 'close', {
-      duration: 5000
-    })
   }
 
   public logOut(): void {

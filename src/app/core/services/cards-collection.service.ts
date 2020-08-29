@@ -11,12 +11,17 @@ export class CardsCollectionService {
 
   constructor() { }
 
-  public setNewCardsStore(cards: IItem[]): void {
+  public addNewItemsToStore(cards: IItem[]): void {
     this.cardsStream$.next(cards);
   }
 
   public getCardsStream(): BehaviorSubject<IItem[]> {
       return this.cardsStream$;
+  }
+
+  public pushItemsToStore(items: IItem[]): void {
+    const newItemsCollection: IItem[] = [...this.cardsStream$.value, ...items];
+    this.cardsStream$.next(newItemsCollection);
   }
 
 }
