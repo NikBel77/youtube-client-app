@@ -19,3 +19,4 @@ install:
 
 script:
   - npm run test-by-ci
+  - npm run lint
