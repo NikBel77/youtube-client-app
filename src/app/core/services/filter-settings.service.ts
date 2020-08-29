@@ -19,7 +19,7 @@ export class FilterSettingsService {
     filterBy: this.filtersMap.empty,
   };
 
-  private filterSubject: BehaviorSubject<IFilterSettings> = new BehaviorSubject(this.filterSettings);
+  private filterStream$: BehaviorSubject<IFilterSettings> = new BehaviorSubject(this.filterSettings);
 
   constructor() { }
 
@@ -31,17 +31,17 @@ export class FilterSettingsService {
       newSettings = { ...this.filterSettings, filterBy, isReverse: false };
     }
     this.filterSettings = newSettings;
-    this.filterSubject.next(newSettings);
+    this.filterStream$.next(newSettings);
   }
 
   public changeKeyWord(keyWord: string): void {
     const newSettings: IFilterSettings = { ...this.filterSettings, keyWord };
     this.filterSettings = newSettings;
-    this.filterSubject.next(newSettings);
+    this.filterStream$.next(newSettings);
   }
 
   public getFilterSettingsObservable(): Observable<IFilterSettings> {
-    return this.filterSubject;
+    return this.filterStream$;
   }
 
   public getFiltersMap(): IFilters {

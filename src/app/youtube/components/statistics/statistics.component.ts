@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IStatistics } from 'src/app/shared/models/search-item.model';
+import { Statistics } from '../../models/statistics.model';
 
 @Component({
   selector: 'app-statistics',
@@ -7,13 +9,32 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  @Input() public icon: string;
-  @Input() public value: string;
+  @Input() public statistics: IStatistics;
+
+  public statisticsMap: Statistics[];
 
   constructor() { }
 
   public ngOnInit(): void {
-    this.value = this.convertValue(this.value);
+
+    this.statisticsMap = [];
+
+    if (this.statistics?.viewCount) {
+      this.statisticsMap
+        .push(new Statistics('visibility', this.convertValue(this.statistics?.viewCount)));
+    }
+    if (this.statistics?.likeCount) {
+      this.statisticsMap
+        .push(new Statistics('thumb_up_alt', this.convertValue(this.statistics?.likeCount)));
+    }
+    if (this.statistics?.dislikeCount) {
+      this.statisticsMap
+        .push(new Statistics('thumb_down_alt', this.convertValue(this.statistics?.dislikeCount)));
+    }
+    if (this.statistics?.commentCount) {
+      this.statisticsMap
+        .push(new Statistics('mode_comment', this.convertValue(this.statistics?.commentCount)));
+    }
   }
 
   public convertValue(value: string): string {

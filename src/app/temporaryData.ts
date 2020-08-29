@@ -1,12 +1,8 @@
-import { IResponce } from './shared/models/search-response.model';
+import { IVideoListResponce } from './shared/models/search-response.model';
 
-const tempData: IResponce = {
+const tempData: IVideoListResponce = {
     'kind': 'youtube#videoListResponse',
     'etag': '"Fznwjl6JEQdo1MGvHOGaz_YanRU/Cmodw7c5XPTM8Yg3kMXelihxek4"',
-    'pageInfo': {
-      'totalResults': 10,
-      'resultsPerPage': 10
-    },
     'items': [
       {
         'kind': 'youtube#video',

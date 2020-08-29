@@ -25,10 +25,7 @@
                 <p>{{ item?.snippet?.description }}</p>
             </div>
 
-            <div class="detail__statistics">
-                <app-statistics *ngFor="let stat of statisticsMap" [value]="stat.value" [icon]="stat.icon">
-                </app-statistics>
-            </div>
+            <app-statistics [statistics]="item?.statistics"></app-statistics>
         </div>
 
     </div>

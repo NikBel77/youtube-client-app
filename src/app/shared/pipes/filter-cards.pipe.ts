@@ -21,7 +21,6 @@ export class FilterCardsPipe implements PipeTransform {
         card.snippet.title,
         card.snippet.description,
         card.snippet.channelTitle,
-        ...card.snippet.tags,
       ];
 
       return onCheck.some(isIncludes);

@@ -21,9 +21,11 @@ export class SearchResultsComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.items = this.cardsCollectionService.getCards();
     this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.filterSettings = filterSettings);
+
+    this.cardsCollectionService.getCardsStream()
+      .subscribe(items => this.items = items);
   }
 
 }

@@ -1,9 +1,32 @@
 export interface IItem {
-    kind: string;
+    kind: 'youtube#video';
     etag: string;
     id: string;
     snippet: ISnipet;
     statistics: IStatistics;
+}
+
+export interface ISearchItem {
+    kind: 'youtube#searchResult';
+    etag: string;
+    id: IIdInfo;
+    snippet: IShortSnippet;
+}
+
+export interface IIdInfo {
+    kind: 'youtube#video';
+    videoId: string;
+}
+
+export interface IShortSnippet {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: IThumbnails;
+    channelTitle: string;
+    liveBroadcastContent: string;
+    publishTime: string;
 }
 
 export interface IStatistics {

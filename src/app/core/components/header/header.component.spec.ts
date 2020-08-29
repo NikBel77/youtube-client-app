@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { routes } from '../../../app-routing.module';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { YoutubeApiService } from '../../services/youtube-api.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -16,6 +19,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes(routes) ],
       declarations: [ HeaderComponent ],
+      providers: [ YoutubeApiService, { provide: HttpClient, useValue: HttpClientTestingModule }]
     })
     .compileComponents();
   }));

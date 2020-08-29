@@ -1,26 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
+import { YoutubeApiService } from '../../services/youtube-api.service';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap, switchMap, filter } from 'rxjs/operators';
+import { CardsCollectionService } from '../../services/cards-collection.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('mainInput') public mainInput: ElementRef<HTMLInputElement>;
 
   // true for dev, change on fasle when build app
   public isFilterBlockVisible: boolean = true;
 
   public activeUserName: User | null = null;
 
-  constructor(private userServise: UserService, private router: Router) {}
+  constructor(
+    private userServise: UserService,
+    private router: Router,
+    private youtubeApiService: YoutubeApiService,
+    private cardsCollectionService: CardsCollectionService) {}
 
   public ngOnInit(): void {
-    this.userServise.getUserObservable()
+    this.userServise.getUserStream()
       .subscribe(newUser => {
         this.activeUserName = newUser;
+      });
+  }
+
+  public ngAfterViewInit(): void {
+    const delayMS: number = 700;
+    const input: HTMLInputElement = this.mainInput.nativeElement;
+
+    const inputStream$: Observable<string> = new Observable((observer) => {
+      input.oninput = () => observer.next(input.value);
+    });
+
+    inputStream$
+      .pipe(
+        filter(value => !!value.trim()),
+        debounceTime(delayMS),
+        distinctUntilChanged(),
+        tap(() => console.log('loading')),
+        switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)),
+        tap(() => console.log('loading complite'))
+      )
+      .subscribe(items => {
+        this.cardsCollectionService.setNewCardsStore(items);
       });
   }
 

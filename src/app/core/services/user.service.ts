@@ -9,7 +9,7 @@ export class UserService {
 
   private user: User | null;
 
-  private userSubject: BehaviorSubject<User> = new BehaviorSubject(this.user);
+  private userStream$: BehaviorSubject<User> = new BehaviorSubject(this.user);
 
   constructor() {
     this.tryLoginFromSession();
@@ -39,7 +39,7 @@ export class UserService {
 
   public logOut(): void {
     window.sessionStorage.clear();
-    this.userSubject.next(null);
+    this.userStream$.next(null);
     this.user = null;
   }
 
@@ -73,7 +73,7 @@ export class UserService {
     this.saveSession(currentUser);
 
     this.user = currentUser;
-    this.userSubject.next(currentUser);
+    this.userStream$.next(currentUser);
 
     return true;
   }
@@ -82,8 +82,8 @@ export class UserService {
     return !!this.user;
   }
 
-  public getUserObservable(): Observable<User> {
-    return this.userSubject;
+  public getUserStream(): Observable<User> {
+    return this.userStream$;
   }
 
 }

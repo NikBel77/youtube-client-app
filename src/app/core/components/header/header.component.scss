@@ -25,19 +25,16 @@
         #main-search-input {
             outline: none;
             border: none;
-            border-bottom-left-radius: 5px;
-            border-top-left-radius: 5px;
-            min-width: 280px;
+            border-radius: 5px;
+            width: 200px;
             padding-left: 10px;
-            font-size: 12px;
+            font-size: 14px;
             background-color: $background-light-color;
-        }
+            transition: width .2s ease-out;
 
-        #main-search-btn {
-            border-bottom-left-radius: 0;
-            border-top-left-radius: 0;
-            padding: 0 30px 0 30px;
-            line-height: 100%;
+            &:focus {
+                width: 300px;
+            }
         }
 
         #setting-btn {
