@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, TemplateRef } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, tap, switchMap, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
 import { CardsCollectionService } from '../../services/cards-collection.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +27,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private userServise: UserService,
     private router: Router,
     private youtubeApiService: YoutubeApiService,
-    private cardsCollectionService: CardsCollectionService) {}
+    private cardsCollectionService: CardsCollectionService,
+    private snackBar: MatSnackBar) {}
 
   public ngOnInit(): void {
     this.userServise.getUserStream()
@@ -48,12 +51,30 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         debounceTime(delayMS),
         distinctUntilChanged(),
         tap(() => console.log('loading')),
-        switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)),
+        switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)
+          .pipe(
+            catchError(error => {
+              this.handleHttpError(error)
+              return [];
+            })
+          )),
         tap(() => console.log('loading complite'))
       )
-      .subscribe(items => {
-        this.cardsCollectionService.setNewCardsStore(items);
-      });
+      .subscribe(
+        (items) => {
+          if(items.length) {
+            this.cardsCollectionService.setNewCardsStore(items)
+          }
+        }
+      );
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    let errorMessage: string = `fail to load from youtube: code ${error.status}`;
+
+    this.snackBar.open(errorMessage, 'close', {
+      duration: 5000
+    })
   }
 
   public logOut(): void {

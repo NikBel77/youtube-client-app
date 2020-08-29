@@ -12,6 +12,8 @@ export class YoutubeApiService {
 
   private apiKey: string = 'AIzaSyCeQUgJ_q3-nIOah7mWxf7LteODbSTllgc';
   private rootUrl: string = 'https://www.googleapis.com';
+  private additionalPathForSearch = '/youtube/v3/search?';
+  private additionalPathForVideos = '/youtube/v3/videos?';
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +24,8 @@ export class YoutubeApiService {
       .set('part', 'snippet')
       .set('maxResults', '15')
       .set('q', query);
-    return this.http.get<IVideoSearchResponce>(this.rootUrl + '/youtube/v3/search?', { params });
+    return this.http
+      .get<IVideoSearchResponce>(this.rootUrl + this.additionalPathForSearch, { params });
   }
 
   private getVideosById(idArray: string[]): Observable<IVideoListResponce> {
@@ -31,7 +34,8 @@ export class YoutubeApiService {
       .set('key', this.apiKey)
       .set('id', ids)
       .set('part', 'snippet,statistics');
-    return this.http.get<IVideoListResponce>(this.rootUrl + '/youtube/v3/videos?', { params });
+    return this.http
+      .get<IVideoListResponce>(this.rootUrl + this.additionalPathForVideos, { params });
   }
 
   private exactIdsFromSearchList(searchList: IVideoSearchResponce): string[] {

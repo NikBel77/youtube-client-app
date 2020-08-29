@@ -8,18 +8,23 @@ import { routes } from '../../../app-routing.module';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { YoutubeApiService } from '../../services/youtube-api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let location: Location;
   let router: Router;
+  let fakeComponent: object = {};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes(routes) ],
       declarations: [ HeaderComponent ],
-      providers: [ YoutubeApiService, { provide: HttpClient, useValue: HttpClientTestingModule }]
+      providers: [ YoutubeApiService,
+        { provide: HttpClient, useValue: HttpClientTestingModule },
+        { provide: MatSnackBar, useValue: fakeComponent }
+      ]
     })
     .compileComponents();
   }));
