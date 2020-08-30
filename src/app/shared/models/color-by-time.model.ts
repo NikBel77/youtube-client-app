@@ -5,7 +5,7 @@ export interface IColorByTime {
 }
 
 export const colors: IColorByTime = {
-    green: 'green',
-    red: 'red',
-    blue: 'blue',
+    green: 'rgb(0, 230, 118)',
+    red: '#B71C1C',
+    blue: '#1e88e5',
 };

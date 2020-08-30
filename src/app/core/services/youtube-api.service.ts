@@ -58,7 +58,7 @@ export class YoutubeApiService {
   }
 
   public getOneById(id: string): Observable<IVideoListResponce> {
-    return of().pipe(switchMap(() => this.getVideosById([ id ])));
+    return this.getVideosById([ id ]);
   }
 
   public tryToLoadMoreVideo(): Observable<IItem[]> {

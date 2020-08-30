@@ -6,7 +6,7 @@
     <div class="detail__card">
 
         <div class="detail__banner">
-            <img #img [src]="item.snippet.thumbnails.high.url" alt="banner" (error)="handleLoadError(img)">
+            <img #img [src]="item.snippet.thumbnails.maxres.url" alt="banner" (error)="handleLoadError(img)">
         </div>
 
         <div class="detail__info" [appColorByTime]="item.snippet.publishedAt">
