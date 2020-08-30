@@ -1,18 +1,12 @@
 import { Directive, Input, HostListener, ElementRef } from '@angular/core';
-
-type warningType = ('EMAIL' | 'PSW' | 'LOGIN');
+import { warningType, borderColors, IBorderColors } from '../models/warning.border.model';
 
 @Directive({
   selector: '[appWarningBorder]'
 })
 export class WarningBorderDirective {
 
-  private colors: { [key: string]: string } = {
-    allowed: 'green',
-    warning: 'red',
-    danger: 'orange',
-    empty: '#00000000'
-  };
+  private colors: IBorderColors = borderColors;
 
   @Input('appWarningBorder') public type: warningType;
 

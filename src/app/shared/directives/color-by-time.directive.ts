@@ -1,15 +1,12 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { colors, IColorByTime } from '../models/color-by-time.model';
 
 @Directive({
   selector: '[appColorByTime]'
 })
 export class ColorByTimeDirective implements OnInit {
 
-  private colors: { [key: string]: string } = {
-    green: 'green',
-    red: 'red',
-    blue: 'blue',
-  };
+  private colors: IColorByTime = colors;
 
   @Input('appColorByTime') public time: string;
 

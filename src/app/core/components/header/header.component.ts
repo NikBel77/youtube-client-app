@@ -18,8 +18,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChild('mainInput') public mainInput: ElementRef<HTMLInputElement>;
 
-  // true for dev, change on fasle when build app
-  public isFilterBlockVisible: boolean = true;
+  public isFilterBlockVisible: boolean = false;
 
   public activeUserName: User | null = null;
 

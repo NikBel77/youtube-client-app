@@ -7,3 +7,9 @@ export interface IFilterSettings {
 export interface IFilters { [key: string]: filters; }
 
 export type filters = ('NONE' |'VIEW' | 'DATE');
+
+export const filterMap: IFilters = {
+    date: 'DATE',
+    view: 'VIEW',
+    empty: 'NONE',
+};

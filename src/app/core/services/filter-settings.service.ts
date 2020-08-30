@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IFilterSettings, filters, IFilters } from '../../shared/models/filter-settings.model';
+import { IFilterSettings, filters, IFilters, filterMap } from '../../shared/models/filter-settings.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class FilterSettingsService {
 
-  private filtersMap: IFilters = {
-    date: 'DATE',
-    view: 'VIEW',
-    empty: 'NONE',
-  };
+  private filtersMap: IFilters = filterMap;
 
   private filterSettings: IFilterSettings = {
     keyWord: '',

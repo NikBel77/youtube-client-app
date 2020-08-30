@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
-import { IFilters, filters } from 'src/app/shared/models/filter-settings.model';
+import { IFilters, filters, filterMap } from 'src/app/shared/models/filter-settings.model';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent {
 
-  public filtersMap: IFilters;
+  public filtersMap: IFilters = filterMap;
 
   constructor(private filterSettingsService: FilterSettingsService) { }
-
-  public ngOnInit(): void {
-    this.filtersMap = this.filterSettingsService.getFiltersMap();
-  }
 
   public setFilter(filter: filters): void {
     this.filterSettingsService.changeFilter(filter);

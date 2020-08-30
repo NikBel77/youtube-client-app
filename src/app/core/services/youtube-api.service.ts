@@ -5,17 +5,12 @@ import { Observable, Subject, of } from 'rxjs';
 import { IItem } from 'src/app/shared/models/search-item.model';
 import { switchMap, map, tap, catchError, share } from 'rxjs/operators';
 import { CardsCollectionService } from './cards-collection.service';
+import { apiSettings } from '../models/youtube-api.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoutubeApiService {
-
-  private apiKey: string = 'AIzaSyCeQUgJ_q3-nIOah7mWxf7LteODbSTllgc';
-  private rootUrl: string = 'https://www.googleapis.com';
-  private additionalPathForSearch: string = '/youtube/v3/search?';
-  private additionalPathForVideos: string = '/youtube/v3/videos?';
-
   private ids: string[] = [];
   private counter: number = 1;
 
@@ -39,23 +34,23 @@ export class YoutubeApiService {
 
   private getSearchListByQuery(query: string): Observable<IVideoSearchResponce> {
     const params: HttpParams = new HttpParams()
-      .set('key', this.apiKey)
+      .set('key', apiSettings.apiKey)
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', '40')
       .set('q', query);
     return this.http
-      .get<IVideoSearchResponce>(this.rootUrl + this.additionalPathForSearch, { params });
+      .get<IVideoSearchResponce>(apiSettings.rootUrl + apiSettings.additionalPathForSearch, { params });
   }
 
   private getVideosById(idArray: string[]): Observable<IVideoListResponce> {
     const ids: string = idArray.join();
     const params: HttpParams = new HttpParams()
-      .set('key', this.apiKey)
+      .set('key', apiSettings.apiKey)
       .set('id', ids)
       .set('part', 'snippet,statistics');
     return this.http
-      .get<IVideoListResponce>(this.rootUrl + this.additionalPathForVideos, { params });
+      .get<IVideoListResponce>(apiSettings.rootUrl + apiSettings.additionalPathForVideos, { params });
   }
 
   private exactIdsFromSearchList(searchList: IVideoSearchResponce): string[] {
