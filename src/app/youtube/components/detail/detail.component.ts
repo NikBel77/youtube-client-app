@@ -29,8 +29,8 @@ export class DetailComponent implements OnInit {
     this.youtubeApiService.getOneById(this.id)
       .subscribe(
         (responce => {
-          if (!responce.items[0]) { this.router.navigate(['404']); }
-          this.item = responce.items[0];
+          if (!responce?.items[0]) { this.router.navigate(['404']); }
+          this.item = responce?.items[0];
           this.publishTime = new Date(this.item?.snippet?.publishedAt);
         }),
         () => this.router.navigate(['404'])
