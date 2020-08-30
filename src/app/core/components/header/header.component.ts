@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 import { YoutubeApiService } from '../../services/youtube-api.service';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
 import { CardsCollectionService } from '../../services/cards-collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public activeUserName: User | null = null;
 
+  public isSpinnerShown: boolean = false;
+
   constructor(
     private userServise: UserService,
     private router: Router,
@@ -31,6 +33,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar) {}
 
   private handleHttpError(error: HttpErrorResponse): void {
+    this.toggleSpinner(false);
     this.snackBar.open(`fail to load from youtube: code ${error.status}`, 'close', {
       duration: 5000
     });
@@ -55,7 +58,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         filter(value => !!value.trim()),
         debounceTime(700),
         distinctUntilChanged(),
-        tap(() => console.log('loading')),
+        tap(() => this.toggleSpinner(true)),
         switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)
           .pipe(
             catchError(error => {
@@ -63,7 +66,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               return [];
             })
           )),
-        tap(() => console.log('loading complite'))
+        tap(() => this.toggleSpinner(false))
       )
       .subscribe(
         (items) => {
@@ -72,6 +75,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           }
         }
       );
+  }
+
+  public toggleSpinner(isShowed: boolean): void {
+    this.isSpinnerShown = isShowed;
   }
 
   public logOut(): void {

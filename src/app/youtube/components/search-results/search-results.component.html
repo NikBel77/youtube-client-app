@@ -6,8 +6,10 @@
     </div>
 
     <div *ngIf="items.length" class="more-button">
-        <button mat-button color="warn" (click)="loadMore()">
+        <button *ngIf="!isSpinnerShown" mat-button color="warn" (click)="loadMore()">
             Load more videos
         </button>
+
+        <mat-spinner *ngIf="isSpinnerShown" diameter="30"></mat-spinner>
     </div>
 </div>

@@ -16,6 +16,8 @@ export class SearchResultsComponent implements OnInit {
 
   public filterSettings: IFilterSettings;
 
+  public isSpinnerShown: boolean = false;
+
   constructor(
     private cardsCollectionService: CardsCollectionService,
     private filterSettingsService: FilterSettingsService,
@@ -28,10 +30,20 @@ export class SearchResultsComponent implements OnInit {
 
     this.cardsCollectionService.getCardsStream()
       .subscribe(items => this.items = items);
+
+    this.youtubeApiService.loadMoreObs$
+      .subscribe(() => {
+        this.toggleSpinner(false);
+      });
   }
 
   public loadMore(): void {
-    this.youtubeApiService.loadMoreStream$.next();
+    this.toggleSpinner(true);
+    this.youtubeApiService.loadMoreEmmiter.next();
+  }
+
+  public toggleSpinner(showSpinner: boolean): void {
+    this.isSpinnerShown = showSpinner;
   }
 
 }

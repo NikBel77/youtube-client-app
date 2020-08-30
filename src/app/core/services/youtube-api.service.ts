@@ -3,9 +3,8 @@ import { IVideoSearchResponce, IVideoListResponce } from 'src/app/shared/models/
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { IItem } from 'src/app/shared/models/search-item.model';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, catchError, share } from 'rxjs/operators';
 import { CardsCollectionService } from './cards-collection.service';
-import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +18,16 @@ export class YoutubeApiService {
 
   private ids: string[] = [];
   private counter: number = 1;
-  public loadMoreStream$: Subject<IItem[]> = new Subject;
+
+  public loadMoreEmmiter: Subject<IItem[] | null> = new Subject();
+  public loadMoreObs$: Observable<IItem[] | null> = this.loadMoreEmmiter
+    .pipe(
+      switchMap(() => this.tryToLoadMoreVideo().pipe(catchError(() => of(null)))),
+      share(),
+    );
 
   constructor(private http: HttpClient, private cardsCollectionService: CardsCollectionService) {
-    this.loadMoreStream$
-      .pipe(
-        switchMap(() => this.tryToLoadMoreVideo())
-      )
+    this.loadMoreObs$
       .subscribe(
         (items) => {
           if (items) {
