@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CardsCollectionService } from '../../../core/services/cards-collection.service';
 import { IItem } from 'src/app/shared/models/search-item.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { map, take } from 'rxjs/operators';
+
+import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 
 @Component({
   selector: 'app-detail',
@@ -17,7 +17,7 @@ export class DetailComponent implements OnInit {
   public publishTime: Date;
 
   constructor(
-    private cardsCollectionService: CardsCollectionService,
+    private youtubeApiService: YoutubeApiService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location
@@ -25,21 +25,16 @@ export class DetailComponent implements OnInit {
 
   public ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
-    let card: IItem;
 
-    this.cardsCollectionService.getCardsStream()
-      .pipe(
-          map(items => items.find(item => item.id === this.id)),
-          take(1)
-        )
-      .subscribe((value) => card = value);
-
-    if (!card) {
-      this.router.navigate(['404']);
-    } else {
-      this.item = card;
-      this.publishTime = new Date(this.item?.snippet?.publishedAt);
-    }
+    this.youtubeApiService.getOneById(this.id)
+      .subscribe(
+        (responce => {
+          if (!responce.items[0]) { this.router.navigate(['404']); }
+          this.item = responce.items[0];
+          this.publishTime = new Date(this.item?.snippet?.publishedAt);
+        }),
+        () => this.router.navigate(['404'])
+      );
   }
 
   public goBack(): void {

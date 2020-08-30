@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { routes } from '../../../app-routing.module';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -15,7 +18,11 @@ describe('DetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes(routes) ],
-      declarations: [ DetailComponent ]
+      declarations: [ DetailComponent ],
+      providers: [
+        YoutubeApiService,
+        { provide: HttpClient, useValue: HttpClientTestingModule }
+      ]
     })
     .compileComponents();
   }));

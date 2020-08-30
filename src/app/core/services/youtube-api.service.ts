@@ -57,6 +57,10 @@ export class YoutubeApiService {
     return searchList.items.map(item => item.id.videoId);
   }
 
+  public getOneById(id: string): Observable<IVideoListResponce> {
+    return of().pipe(switchMap(() => this.getVideosById([ id ])));
+  }
+
   public tryToLoadMoreVideo(): Observable<IItem[]> {
     if (!this.ids.length) { return of(null); }
     const endSlice: number = ((this.counter + 1) * 10);
