@@ -16,6 +16,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
+  private typingClass: string = 'search__input_typing';
+
   @ViewChild('mainInput') public mainInput: ElementRef<HTMLInputElement>;
 
   public isFilterBlockVisible: boolean = false;
@@ -54,8 +56,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
     inputStream$
       .pipe(
-        filter(value => !!value.trim()),
+        tap(() => this.toggleTypingClass(true)),
         debounceTime(700),
+        tap(() => this.toggleTypingClass(false)),
+        filter(value => !!value.trim()),
         distinctUntilChanged(),
         tap(() => this.toggleSpinner(true)),
         switchMap(query => this.youtubeApiService.fetchVideosByQuery(query)
@@ -76,8 +80,19 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       );
   }
 
-  public toggleSpinner(isShowed: boolean): void {
-    this.isSpinnerShown = isShowed;
+  public toggleTypingClass(isTyping: boolean): void {
+    const input: HTMLInputElement = this.mainInput.nativeElement;
+    const typingClass: string = this.typingClass;
+
+    if (isTyping && !input.classList.contains(typingClass)) {
+      input.classList.add(typingClass);
+    } else if (!isTyping && input.classList.contains(typingClass)) {
+      input.classList.remove(typingClass);
+    }
+  }
+
+  public toggleSpinner(shouldBeVisible: boolean): void {
+    this.isSpinnerShown = shouldBeVisible;
   }
 
   public logOut(): void {

@@ -10,11 +10,11 @@ import { IFilters, filters, filterMap, IFilterSettings } from 'src/app/shared/mo
 export class FilterComponent implements OnInit {
 
   public filtersMap: IFilters = filterMap;
-  public actualFilterSettings: IFilterSettings
+  public actualFilterSettings: IFilterSettings;
 
   constructor(private filterSettingsService: FilterSettingsService) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.actualFilterSettings = filterSettings);
   }
@@ -23,8 +23,8 @@ export class FilterComponent implements OnInit {
     this.filterSettingsService.changeFilter(filter);
   }
 
-  public getCurrentArrowPos(filter: filters) {
-    if(this.actualFilterSettings.filterBy === filter) {
+  public getCurrentArrowPos(filter: filters): string {
+    if (this.actualFilterSettings.filterBy === filter) {
       return this.actualFilterSettings.isReverse ? 'arrow_drop_up' : 'arrow_drop_down';
     } else {
       return 'arrow_right';

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,14 @@ export class LoginService {
     }
   }
 
-  public register(name: string, email: string, psw: string): void {
-    const isRegister: boolean = this.userService.saveUserToLocalStorage(name, email, psw);
+  public tryRegister(user: User): void {
+    const { name, email, password } = user;
+    const isRegister: boolean = this.userService.saveUserToLocalStorage(name, email, password);
     if (!isRegister) {
       this.openSnackBar(`user: ${name} has alredy registered`);
     } else {
       this.openSnackBar(`user ${name} registered`);
-      this.userService.loginUser(name, psw);
+      this.userService.loginUser(name, password);
       this.router.navigate(['home']);
     }
   }

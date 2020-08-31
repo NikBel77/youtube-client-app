@@ -15,9 +15,9 @@ describe('DetailComponent', () => {
   let fixture: ComponentFixture<DetailComponent>;
   let location: Location;
   let router: Router;
-  let youtubeApiServiceMock = createSpyObj(['apiService'], {
+  let youtubeApiServiceMock: object = createSpyObj(['apiService'], {
     getOneById: () => new Observable()
-  })
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

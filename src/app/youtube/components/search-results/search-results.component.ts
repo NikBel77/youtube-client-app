@@ -4,6 +4,7 @@ import { CardsCollectionService } from '../../../core/services/cards-collection.
 import { IFilterSettings } from '../../../shared/models/filter-settings.model';
 import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -22,6 +23,7 @@ export class SearchResultsComponent implements OnInit {
     private cardsCollectionService: CardsCollectionService,
     private filterSettingsService: FilterSettingsService,
     private youtubeApiService: YoutubeApiService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -44,6 +46,10 @@ export class SearchResultsComponent implements OnInit {
 
   public toggleSpinner(showSpinner: boolean): void {
     this.isSpinnerShown = showSpinner;
+  }
+
+  public goToDetail(id: string): void {
+    this.router.navigate(['detail', id]);
   }
 
 }
