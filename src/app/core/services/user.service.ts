@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../shared/models/user.model';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { setActiveUser } from '../../redux/actions/user.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private user: User | null;
-
-  private userStream$: BehaviorSubject<User> = new BehaviorSubject(this.user);
-
-  constructor() {
+  constructor(private store: Store) {
     this.tryLoginFromSession();
   }
 
@@ -32,15 +29,16 @@ export class UserService {
     const user: User = JSON.parse(window.sessionStorage.getItem('user'));
     if (!user.name || !user.password) { return false; }
 
-    let isLogin: boolean;
-    isLogin = this.loginUser(user.name, user.password);
-    return isLogin;
+    const fromLogIn: User | null = this.loginUser(user.name, user.password);
+    if (!!fromLogIn) {
+      this.store.dispatch(setActiveUser({ user }));
+      return true;
+    }
+    return false;
   }
 
   public logOut(): void {
     window.sessionStorage.clear();
-    this.userStream$.next(null);
-    this.user = null;
   }
 
   public saveUserToLocalStorage(name: string, email: string, psw: string): boolean {
@@ -62,28 +60,17 @@ export class UserService {
     }
   }
 
-  public loginUser(name: string, password: string): boolean {
+  public loginUser(name: string, password: string): User | null {
     const users: User[] = this.getUsersFromLocalStorage();
-    if (!users) { return false; }
+    if (!users) { return null; }
 
     const currentUser: User | undefined = users.find((user) => user.name === name);
-    if (!currentUser) { return false; }
-    if (currentUser.password !== password) { return false; }
+    if (!currentUser) { return null; }
+    if (currentUser.password !== password) { return null; }
 
     this.saveSession(currentUser);
 
-    this.user = currentUser;
-    this.userStream$.next(currentUser);
-
-    return true;
-  }
-
-  public isLogin(): boolean {
-    return !!this.user;
-  }
-
-  public getUserStream(): Observable<User> {
-    return this.userStream$;
+    return currentUser;
   }
 
 }

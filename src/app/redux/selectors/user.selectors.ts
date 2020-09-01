@@ -6,10 +6,10 @@ const selectUsers: MemoizedSelector<State, IUserStore> = createFeatureSelector('
 
 export const getActiveUser: MemoizedSelector<State, User> = createSelector(
     selectUsers,
-    (userStore) => userStore.activeUser
-)
+    ({ activeUser }) => activeUser
+);
 
-export const getAllUsers: MemoizedSelector<State, User[]> = createSelector(
+export const isLogin: MemoizedSelector<State, boolean> = createSelector(
     selectUsers,
-    (userStore) => userStore.users
-)
+    (userStore) => !!userStore.activeUser
+);

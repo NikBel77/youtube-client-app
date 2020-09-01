@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthPageComponent } from './pages/auth-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import pathes from '../constants/router.pathes';
+import paths from '../constants/router.paths';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AuthPageComponent,
     children: [
       { path: '', component: LoginComponent, pathMatch: 'full' },
-      { path: pathes.REGISTER, component: RegisterComponent }
+      { path: paths.REGISTER, component: RegisterComponent }
     ]
   }
 ];

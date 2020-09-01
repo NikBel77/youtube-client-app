@@ -3,18 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 
-import pathes from './constants/router.pathes';
+import paths from './constants/router.paths';
 
 export const routes: Routes = [
-  { path: '', redirectTo: pathes.MAIN_PAGE, pathMatch: 'full'},
+  { path: '', redirectTo: paths.MAIN_PAGE, pathMatch: 'full'},
   {
-    path: pathes.MAIN_PAGE,
+    path: paths.MAIN_PAGE,
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('src/app/youtube/youtube.module').then(m => m.YoutubeModule),
   },
   {
-    path: pathes.AUTH_PAGE,
+    path: paths.AUTH_PAGE,
     loadChildren: () =>
       import('src/app/auth/auth.module').then(m => m.AuthModule),
   },

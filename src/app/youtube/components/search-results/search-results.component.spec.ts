@@ -9,11 +9,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { routes } from '../../../app-routing.module';
 
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { State } from 'src/app/redux/state.models';
+
+
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
   let fixture: ComponentFixture<SearchResultsComponent>;
   let location: Location;
   let router: Router;
+  let store: MockStore;
+
+  let initialState: State = {
+    userStore: { activeUser: null },
+    collectionStore: { collection: [] },
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,6 +35,7 @@ describe('SearchResultsComponent', () => {
       providers: [
         YoutubeApiService,
         { provide: HttpClient, useValue: HttpClientTestingModule },
+        provideMockStore({ initialState }),
       ]
     })
     .compileComponents();
@@ -34,7 +45,7 @@ describe('SearchResultsComponent', () => {
     fixture = TestBed.createComponent(SearchResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
+    store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
     router.initialNavigation();

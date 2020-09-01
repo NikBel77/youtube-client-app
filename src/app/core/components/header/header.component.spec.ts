@@ -10,12 +10,21 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { State } from 'src/app/redux/state.models';
+
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let location: Location;
   let router: Router;
   let fakeComponent: object = {};
+  let store: MockStore;
+
+  let initialState: State = {
+    userStore: { activeUser: null },
+    collectionStore: { collection: [] },
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,7 +32,8 @@ describe('HeaderComponent', () => {
       declarations: [ HeaderComponent ],
       providers: [ YoutubeApiService,
         { provide: HttpClient, useValue: HttpClientTestingModule },
-        { provide: MatSnackBar, useValue: fakeComponent }
+        { provide: MatSnackBar, useValue: fakeComponent },
+        provideMockStore({ initialState }),
       ]
     })
     .compileComponents();
@@ -32,8 +42,9 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    
     fixture.detectChanges();
-
+    store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
     router.initialNavigation();

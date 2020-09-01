@@ -10,7 +10,7 @@
                     class="search__input"
                     placeholder="What are you want to find out?"
                     #mainInput
-                    [disabled]="!activeUserName"
+                    [disabled]="!activeUser"
                 />
 
                 <div class="spinner-wrapper">
@@ -28,11 +28,11 @@
 
         <div class="user">
 
-            <span class="user__name" *ngIf="!!activeUserName">
-                {{ activeUserName.name }}
+            <span class="user__name" *ngIf="!!activeUser">
+                {{ activeUser.name }}
             </span>
             <button
-                *ngIf="!!activeUserName"
+                *ngIf="!!activeUser"
                 color="primary"
                 mat-stroked-button
                 id="logout-btn"
@@ -40,7 +40,7 @@
                 Log out
             </button>
             <button
-                *ngIf="!activeUserName"
+                *ngIf="!activeUser"
                 color="primary"
                 mat-stroked-button
                 id="logout-btn"

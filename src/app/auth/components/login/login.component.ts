@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { Store } from '@ngrx/store';
+import { setActiveUser } from '../../../redux/actions/user.actions';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +11,11 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private store: Store) { }
 
   public handleLogin(name: string, pasword: string): void {
-    this.loginService.tryLogin(name, pasword);
+    const user: User | null = this.loginService.tryLogin(name, pasword);
+    this.store.dispatch(setActiveUser({ user }));
   }
 
 }

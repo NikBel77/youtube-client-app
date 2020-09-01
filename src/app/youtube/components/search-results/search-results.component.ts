@@ -4,7 +4,7 @@ import { IFilterSettings } from '../../../shared/models/filter-settings.model';
 import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 import { Router } from '@angular/router';
-import pathes from '../../../constants/router.pathes';
+import pathes from '../../../constants/router.paths';
 import { Store } from '@ngrx/store';
 import { getCollection } from '../../../redux/selectors/collection.selectors';
 import { pushToCollection } from '../../../redux/actions/collection.actions';
@@ -37,12 +37,12 @@ export class SearchResultsComponent implements OnInit {
     this.items$ = this.store.select(getCollection)
       .pipe(
         tap(items => this.hasContent = !!items.length)
-      )
+      );
 
     this.youtubeApiService.loadMoreObs$
       .subscribe((moreVideos) => {
-        if(moreVideos && moreVideos.length) {
-          this.store.dispatch(pushToCollection({ items: moreVideos }))
+        if (moreVideos && moreVideos.length) {
+          this.store.dispatch(pushToCollection({ items: moreVideos }));
         }
         this.toggleSpinner(false);
       });

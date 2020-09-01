@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { YoutubePageComponent } from './pages/youtube-page.component';
-import pathes from '../constants/router.pathes';
+import paths from '../constants/router.paths';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     component: YoutubePageComponent,
     children: [
       { path: '', component: SearchResultsComponent, pathMatch: 'full' },
-      { path: pathes.DETAIL, component: DetailComponent }
+      { path: paths.DETAIL, component: DetailComponent }
     ]
   }
 ];

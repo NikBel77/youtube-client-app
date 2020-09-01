@@ -3,6 +3,7 @@ import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/shared/models/user.model';
+import paths from 'src/app/constants/router.paths';
 
 @Injectable({
   providedIn: 'root'
@@ -20,25 +21,29 @@ export class LoginService {
     });
   }
 
-  public tryLogin(name: string, psw: string): void {
-    const isLogin: boolean = this.userService.loginUser(name, psw);
-    if (!isLogin) {
+  public tryLogin(name: string, psw: string): User | null {
+    const user: User | null = this.userService.loginUser(name, psw);
+    if (!user) {
       this.openSnackBar('incorrect name or password');
+      return null;
     } else {
       this.openSnackBar(`loign as ${name}`);
-      this.router.navigate(['youtube']);
+      this.router.navigate([paths.MAIN_PAGE]);
+      return user;
     }
   }
 
-  public tryRegister(user: User): void {
+  public tryRegister(user: User): User | null {
     const { name, email, password } = user;
     const isRegister: boolean = this.userService.saveUserToLocalStorage(name, email, password);
     if (!isRegister) {
       this.openSnackBar(`user: ${name} has alredy registered`);
+      return null;
     } else {
       this.openSnackBar(`user ${name} registered`);
       this.userService.loginUser(name, password);
-      this.router.navigate(['youtube']);
+      this.router.navigate([paths.MAIN_PAGE]);
+      return user;
     }
   }
 }

@@ -7,8 +7,10 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import pathes from '../../../constants/router.pathes';
+import paths from '../../../constants/router.paths';
 import { setNewCollection } from '../../../redux/actions/collection.actions';
+import { getActiveUser } from '../../../redux/selectors/user.selectors';
+import { setActiveUser } from '../../../redux/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { IItem } from 'src/app/shared/models/search-item.model';
 
@@ -25,8 +27,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public isFilterBlockVisible: boolean = false;
 
-  public activeUserName: User | null = null;
-
+  public activeUser: User | null = null;
   public isSpinnerShown: boolean = false;
 
   constructor(
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private router: Router,
     private youtubeApiService: YoutubeApiService,
     private store: Store,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar) { }
 
   private handleHttpError(error: HttpErrorResponse): void {
     this.toggleSpinner(false);
@@ -44,10 +45,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.userServise.getUserStream()
-      .subscribe(newUser => {
-        this.activeUserName = newUser;
-      });
+    this.store.select( getActiveUser )
+    .subscribe(
+      (user) => this.activeUser = user
+    );
   }
 
   public ngAfterViewInit(): void {
@@ -75,9 +76,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         tap(() => this.toggleSpinner(false))
       )
       .subscribe(
-        (items : IItem[]) => {
+        (items: IItem[]) => {
           if (items.length) {
-            this.store.dispatch(setNewCollection({ items }))
+            this.store.dispatch(setNewCollection({ items }));
           }
         }
       );
@@ -100,15 +101,16 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public logOut(): void {
     this.userServise.logOut();
-    this.router.navigate([pathes.AUTH_PAGE]);
+    this.store.dispatch(setActiveUser({ user: null }));
+    this.router.navigate([paths.AUTH_PAGE]);
   }
 
   public goToAuth(): void {
-    this.router.navigate([pathes.AUTH_PAGE]);
+    this.router.navigate([paths.AUTH_PAGE]);
   }
 
   public goToHome(): void {
-    this.router.navigate([pathes.MAIN_PAGE]);
+    this.router.navigate([paths.MAIN_PAGE]);
   }
 
 }
