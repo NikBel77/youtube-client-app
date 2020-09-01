@@ -5,6 +5,7 @@ import { IFilterSettings } from '../../../shared/models/filter-settings.model';
 import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 import { Router } from '@angular/router';
+import pathes from '../../../constants/router.pathes';
 
 @Component({
   selector: 'app-search-results',
@@ -49,7 +50,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   public goToDetail(id: string): void {
-    this.router.navigate(['detail', id]);
+    this.router.navigate([pathes.MAIN_PAGE, 'detail', id]);
   }
 
 }

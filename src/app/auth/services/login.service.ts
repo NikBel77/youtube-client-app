@@ -26,7 +26,7 @@ export class LoginService {
       this.openSnackBar('incorrect name or password');
     } else {
       this.openSnackBar(`loign as ${name}`);
-      this.router.navigate(['home']);
+      this.router.navigate(['youtube']);
     }
   }
 
@@ -38,7 +38,7 @@ export class LoginService {
     } else {
       this.openSnackBar(`user ${name} registered`);
       this.userService.loginUser(name, password);
-      this.router.navigate(['home']);
+      this.router.navigate(['youtube']);
     }
   }
 }

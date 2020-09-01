@@ -8,6 +8,7 @@ import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError 
 import { CardsCollectionService } from '../../services/cards-collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import pathes from '../../../constants/router.pathes';
 
 @Component({
   selector: 'app-header',
@@ -97,15 +98,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public logOut(): void {
     this.userServise.logOut();
-    this.router.navigate(['auth']);
+    this.router.navigate([pathes.AUTH_PAGE]);
   }
 
   public goToAuth(): void {
-    this.router.navigate(['auth']);
+    this.router.navigate([pathes.AUTH_PAGE]);
   }
 
   public goToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate([pathes.MAIN_PAGE]);
   }
 
 }
