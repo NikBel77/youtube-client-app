@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
+import { reducers } from './redux/reducers/index';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,7 +27,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     CoreModule,
     YoutubeModule,
     AuthModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot()
