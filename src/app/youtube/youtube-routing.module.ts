@@ -11,7 +11,7 @@ const routes: Routes = [
     component: YoutubePageComponent,
     children: [
       { path: '', component: SearchResultsComponent, pathMatch: 'full' },
-      { path: paths.DETAIL, component: DetailComponent }
+      { path: paths.DETAIL + '/:id', component: DetailComponent }
     ]
   }
 ];

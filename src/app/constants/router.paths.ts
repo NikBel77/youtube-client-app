@@ -1,7 +1,7 @@
 enum paths {
     MAIN_PAGE = 'youtube',
     AUTH_PAGE = 'auth',
-    DETAIL = 'detail/:id',
+    DETAIL = 'detail',
     REGISTER = 'register',
 }
 

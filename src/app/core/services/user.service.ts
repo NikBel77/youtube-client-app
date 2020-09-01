@@ -39,6 +39,7 @@ export class UserService {
 
   public logOut(): void {
     window.sessionStorage.clear();
+    this.store.dispatch(setActiveUser({ user: null }));
   }
 
   public saveUserToLocalStorage(name: string, email: string, psw: string): boolean {
@@ -69,7 +70,7 @@ export class UserService {
     if (currentUser.password !== password) { return null; }
 
     this.saveSession(currentUser);
-
+    this.store.dispatch(setActiveUser({ user: currentUser }));
     return currentUser;
   }
 
