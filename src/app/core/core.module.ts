@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardsCollectionService } from './services/cards-collection.service';
 import { FilterSettingsService } from './services/filter-settings.service';
 import { UserService } from './services/user.service';
 import { YoutubeApiService } from './services/youtube-api.service';
@@ -19,7 +18,6 @@ import { SharedModule } from '../shared/shared.module';
     NotFoundComponent
   ],
   providers: [
-    CardsCollectionService,
     FilterSettingsService,
     UserService,
     YoutubeApiService,

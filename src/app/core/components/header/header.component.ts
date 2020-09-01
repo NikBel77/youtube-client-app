@@ -5,7 +5,6 @@ import { User } from 'src/app/shared/models/user.model';
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
-import { CardsCollectionService } from '../../services/cards-collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import pathes from '../../../constants/router.pathes';
@@ -34,7 +33,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private userServise: UserService,
     private router: Router,
     private youtubeApiService: YoutubeApiService,
-    private cardsCollectionService: CardsCollectionService,
     private store: Store,
     private snackBar: MatSnackBar) {}
 
