@@ -4,7 +4,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { IItem } from 'src/app/shared/models/search-item.model';
 import { switchMap, map, tap, catchError, share } from 'rxjs/operators';
-import { CardsCollectionService } from './cards-collection.service';
 import { apiSettings } from '../models/youtube-api.model';
 
 @Injectable({
@@ -21,16 +20,7 @@ export class YoutubeApiService {
       share(),
     );
 
-  constructor(private http: HttpClient, private cardsCollectionService: CardsCollectionService) {
-    this.loadMoreObs$
-      .subscribe(
-        (items) => {
-          if (items) {
-            this.cardsCollectionService.pushItemsToStore(items);
-          }
-        }
-      );
-  }
+  constructor(private http: HttpClient) { }
 
   private getSearchListByQuery(query: string): Observable<IVideoSearchResponce> {
     const params: HttpParams = new HttpParams()

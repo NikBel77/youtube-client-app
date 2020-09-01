@@ -11,6 +11,6 @@ export interface ICollectionStore {
 }
 
 export interface State {
-    user: IUserStore;
-    collection: ICollectionStore;
+    userStore: IUserStore;
+    collectionStore: ICollectionStore;
 }

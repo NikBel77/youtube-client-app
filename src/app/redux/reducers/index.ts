@@ -4,6 +4,6 @@ import { collectionReducer } from './collection.reducer';
 import { userReducer } from './user.reducer';
 
 export const reducers: ActionReducerMap<State> = {
-    user: userReducer,
-    collection: collectionReducer
+    userStore: userReducer,
+    collectionStore: collectionReducer
 };

@@ -1,9 +1,16 @@
 import { IUserStore } from '../state.models';
 import * as userActions from '../actions/user.actions';
 import { ActionReducer, createReducer, on, Action } from '@ngrx/store';
+import { User } from 'src/app/shared/models/user.model';
+
+const getUserFromLS = (): User[] => {
+    let users: User[] | null;
+    users = JSON.parse(window.localStorage.getItem('users'));
+    return users || [];
+}
 
 const initialState: IUserStore = {
-    users: [],
+    users: getUserFromLS(),
     activeUser: null
 };
 

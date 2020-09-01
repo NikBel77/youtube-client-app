@@ -9,6 +9,9 @@ import { CardsCollectionService } from '../../services/cards-collection.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import pathes from '../../../constants/router.pathes';
+import { setNewCollection } from '../../../redux/actions/collection.actions';
+import { Store } from '@ngrx/store';
+import { IItem } from 'src/app/shared/models/search-item.model';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +35,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private router: Router,
     private youtubeApiService: YoutubeApiService,
     private cardsCollectionService: CardsCollectionService,
+    private store: Store,
     private snackBar: MatSnackBar) {}
 
   private handleHttpError(error: HttpErrorResponse): void {
@@ -73,9 +77,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         tap(() => this.toggleSpinner(false))
       )
       .subscribe(
-        (items) => {
+        (items : IItem[]) => {
           if (items.length) {
-            this.cardsCollectionService.addNewItemsToStore(items);
+            this.store.dispatch(setNewCollection({ items }))
           }
         }
       );
