@@ -5,7 +5,6 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 
-import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { DetailComponent } from './components/detail/detail.component';
 import { YoutubeRoutingModule } from './youtube-routing.module';
@@ -21,7 +20,6 @@ import { YoutubePageComponent } from './pages/youtube-page.component';
   ],
   imports: [
     YoutubeRoutingModule,
-    MaterialModule,
     SharedModule,
     CommonModule
   ]

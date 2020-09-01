@@ -8,7 +8,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { SharedModule } from '../shared/shared.module';
     YoutubeApiService,
   ],
   imports: [
-    MaterialModule,
     SharedModule,
     CommonModule,
   ],
