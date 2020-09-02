@@ -7,12 +7,11 @@ import { State } from 'src/app/redux/state.models';
 describe('UserService', () => {
   let service: UserService;
   let store: MockStore;
-  
+
   let initialState: State = {
     userStore: { activeUser: null },
     collectionStore: { collection: [] },
-  }
-
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

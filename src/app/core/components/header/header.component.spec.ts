@@ -24,7 +24,7 @@ describe('HeaderComponent', () => {
   let initialState: State = {
     userStore: { activeUser: null },
     collectionStore: { collection: [] },
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,7 +42,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    
+
     fixture.detectChanges();
     store = TestBed.inject(MockStore);
     location = TestBed.get(Location);

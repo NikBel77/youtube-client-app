@@ -3,6 +3,7 @@ enum paths {
     AUTH_PAGE = 'auth',
     DETAIL = 'detail',
     REGISTER = 'register',
+    ADMIN = 'admin'
 }
 
 export default paths;

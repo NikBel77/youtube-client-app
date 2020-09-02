@@ -22,7 +22,7 @@ describe('RegisterComponent', () => {
   let initialState: State = {
     userStore: { activeUser: null },
     collectionStore: { collection: [] },
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

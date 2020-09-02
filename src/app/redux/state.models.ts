@@ -1,4 +1,5 @@
 import { IItem } from '../shared/models/search-item.model';
+import { ICustomItem } from '../shared/models/сustom-item.model';
 import { User } from '../shared/models/user.model';
 
 export interface IUserStore {
@@ -6,7 +7,8 @@ export interface IUserStore {
 }
 
 export interface ICollectionStore {
-    collection: IItem[];
+    items: IItem[];
+    customItems: ICustomItem[];
 }
 
 export interface State {

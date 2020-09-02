@@ -113,4 +113,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate([paths.MAIN_PAGE]);
   }
 
+  public goToAdmin(): void {
+    this.router.navigate([paths.ADMIN]);
+  }
+
 }

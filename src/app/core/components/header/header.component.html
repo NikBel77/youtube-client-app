@@ -28,9 +28,18 @@
 
         <div class="user">
 
+            <button
+                color="accent"
+                mat-raised-button
+                id="logout-btn"
+                (click)="goToAdmin()">
+                create new card
+            </button>
+
             <span class="user__name" *ngIf="!!activeUser">
                 {{ activeUser.name }}
             </span>
+
             <button
                 *ngIf="!!activeUser"
                 color="primary"
@@ -39,6 +48,7 @@
                 (click)="logOut()">
                 Log out
             </button>
+
             <button
                 *ngIf="!activeUser"
                 color="primary"

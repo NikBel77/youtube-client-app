@@ -1,16 +1,15 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { IItem } from 'src/app/shared/models/search-item.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ICustomItem } from 'src/app/shared/models/сustom-item.model';
 
 @Component({
-  selector: 'app-search-item',
-  templateUrl: './search-item.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./search-item.component.scss']
+  selector: 'app-custom-item',
+  templateUrl: './custom-item.component.html',
+  styleUrls: ['./custom-item.component.scss']
 })
-export class SearchItemComponent implements OnInit {
+export class CustomItemComponent implements OnInit {
   private MAX_TITLE_LEN: number = 70;
 
-  @Input() public item: IItem;
+  @Input() public item: ICustomItem;
   @Output() public goToDetail: EventEmitter<string> = new EventEmitter<string>();
 
   public title: string;
@@ -28,5 +27,5 @@ export class SearchItemComponent implements OnInit {
     }
     return title;
   }
-
 }
+

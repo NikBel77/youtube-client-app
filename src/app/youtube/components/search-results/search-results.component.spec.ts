@@ -12,7 +12,6 @@ import { routes } from '../../../app-routing.module';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
 
-
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
   let fixture: ComponentFixture<SearchResultsComponent>;
@@ -23,7 +22,7 @@ describe('SearchResultsComponent', () => {
   let initialState: State = {
     userStore: { activeUser: null },
     collectionStore: { collection: [] },
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

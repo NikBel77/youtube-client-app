@@ -1,10 +1,6 @@
 <div *ngIf="item" class="card" [appColorByTime]="item.snippet.publishedAt">
     <div>
-        <img [src]="item.snippet.thumbnails.maxres.url" class="card__thumbnail" alt="thumbnail">
-
-        <div class="card__info">
-            <app-statistics [statistics]="item.statistics"></app-statistics>
-        </div>
+        <img [src]="item.snippet.thumbnail" class="card__thumbnail" alt="thumbnail">
     </div>
 
     <div class="card__title">

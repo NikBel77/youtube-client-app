@@ -18,6 +18,12 @@ export const routes: Routes = [
     loadChildren: () =>
       import('src/app/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: paths.ADMIN,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('src/app/admin/admin.module').then(m => m.AdminModule),
+  },
   { path: '**', component: NotFoundComponent }
 ];
 
