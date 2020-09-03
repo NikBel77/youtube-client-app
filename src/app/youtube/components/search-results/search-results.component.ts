@@ -5,12 +5,10 @@ import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 import { Router } from '@angular/router';
 import pathes from '../../../constants/router.paths';
 import { Store } from '@ngrx/store';
-import { getCustomItems, getItems } from '../../../redux/selectors/collection.selectors';
+import { getCollection } from '../../../redux/selectors/collection.selectors';
 import { pushToCollection } from '../../../redux/actions/collection.actions';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { IItem } from 'src/app/shared/models/search-item.model';
-import { ICustomItem } from 'src/app/shared/models/сustom-item.model';
+import { Observable, Subscriber, Subscription } from 'rxjs';
+import { ICollectionItem } from 'src/app/redux/state.models';
 
 @Component({
   selector: 'app-search-results',
@@ -19,12 +17,13 @@ import { ICustomItem } from 'src/app/shared/models/сustom-item.model';
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
-  public items$: Observable<IItem[]>;
-  public customItems$: Observable<ICustomItem[]>;
+  public collection$: Observable<ICollectionItem[]>;
+  public subscriptions: Subscriber<Subscription>[] = []
   public hasContent: boolean;
-  public hasCustomItems: boolean;
   public filterSettings: IFilterSettings;
   public isSpinnerShown: boolean = false;
+
+  set subscription(sbc) { this.subscriptions.push(sbc) }
 
   constructor(
     private filterSettingsService: FilterSettingsService,
@@ -34,20 +33,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.filterSettingsService.getFilterSettingsObservable()
+    this.collection$ = this.store.select(getCollection)
+
+    this.subscription = this.collection$
+        .subscribe(items => this.hasContent = !!items.length)
+
+    this.subscription = this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.filterSettings = filterSettings);
 
-    this.items$ = this.store.select(getItems)
-      .pipe(
-        tap(items => this.hasContent = !!items.length)
-      );
 
-    this.customItems$ = this.store.select(getCustomItems)
-      .pipe(
-        tap(items => this.hasCustomItems = !!items.length)
-      )
-
-    this.youtubeApiService.loadMoreObs$
+    this.subscription = this.youtubeApiService.loadMoreObs$
       .subscribe((moreVideos) => {
         if (moreVideos && moreVideos.length) {
           this.store.dispatch(pushToCollection({ items: moreVideos }));
@@ -57,7 +52,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-
+    this.subscriptions.forEach(sbc => sbc.unsubscribe())
   }
 
   public loadMore(): void {

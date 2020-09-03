@@ -1,13 +1,11 @@
 <div class="container">
-    <div class="search-result">
-        <ng-template ngFor let-item [ngForOf]="customItems$ | async">
-            <app-custom-item [item]="item" (goToDetail)="goToDetail($event)"></app-custom-item>
-        </ng-template>
-    </div>
 
     <div class="search-result">
-        <ng-template ngFor let-item [ngForOf]="items$ | async | filterCards:filterSettings">
-            <app-search-item [item]="item" (goToDetail)="goToDetail($event)"></app-search-item>
+        <ng-template ngFor let-item [ngForOf]="collection$ | async | filterCards:filterSettings">
+                <app-search-item *ngIf="!item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+                </app-search-item>
+                <app-custom-item *ngIf="item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+                </app-custom-item>
         </ng-template>
     </div>
 

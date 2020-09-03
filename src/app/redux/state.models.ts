@@ -6,6 +6,11 @@ export interface IUserStore {
     activeUser: User | null;
 }
 
+export interface ICollectionItem {
+    item: IItem | ICustomItem,
+    isCustom: boolean
+}
+
 export interface ICollectionStore {
     items: IItem[];
     customItems: ICustomItem[];
