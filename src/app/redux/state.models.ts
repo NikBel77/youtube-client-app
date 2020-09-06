@@ -7,8 +7,8 @@ export interface IUserStore {
 }
 
 export interface ICollectionItem {
-    item: IItem | ICustomItem,
-    isCustom: boolean
+    item: IItem | ICustomItem;
+    isCustom: boolean;
 }
 
 export interface ICollectionStore {

@@ -7,7 +7,7 @@ import pathes from '../../../constants/router.paths';
 import { Store } from '@ngrx/store';
 import { getCollection } from '../../../redux/selectors/collection.selectors';
 import { pushToCollection } from '../../../redux/actions/collection.actions';
-import { Observable, Subscriber, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ICollectionItem } from 'src/app/redux/state.models';
 
 @Component({
@@ -18,12 +18,12 @@ import { ICollectionItem } from 'src/app/redux/state.models';
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public collection$: Observable<ICollectionItem[]>;
-  public subscriptions: Subscriber<Subscription>[] = []
+  public subscriptions: Subscription[] = [];
   public hasContent: boolean;
   public filterSettings: IFilterSettings;
   public isSpinnerShown: boolean = false;
 
-  set subscription(sbc) { this.subscriptions.push(sbc) }
+  set subscription(sbc: Subscription) { this.subscriptions.push(sbc); }
 
   constructor(
     private filterSettingsService: FilterSettingsService,
@@ -33,16 +33,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.collection$ = this.store.select(getCollection)
+    this.collection$ = this.store.select(getCollection);
 
     this.subscription = this.collection$
         .subscribe(items => {
-          this.hasContent = !!items.length
-        })
+          this.hasContent = !!items.length;
+        });
 
     this.subscription = this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.filterSettings = filterSettings);
-
 
     this.subscription = this.youtubeApiService.loadMoreObs$
       .subscribe((moreVideos) => {
@@ -54,7 +53,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.subscriptions.forEach(sbc => sbc.unsubscribe())
+    this.subscriptions.forEach(sbc => sbc.unsubscribe());
   }
 
   public loadMore(): void {
@@ -62,7 +61,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.youtubeApiService.loadMoreEmmiter.next();
   }
 
-  public goToAdmin() {
+  public goToAdmin(): void {
     this.router.navigate([pathes.ADMIN]);
   }
 
@@ -70,7 +69,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.isSpinnerShown = showSpinner;
   }
 
-  public goToDetail({ id, isCustom }): void {
+  public goToDetail(params: { id: string, isCustom: boolean }): void {
+    const { id, isCustom } = params;
     this.router.navigate([pathes.MAIN_PAGE, pathes.DETAIL, id, isCustom]);
   }
 

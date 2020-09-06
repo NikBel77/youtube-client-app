@@ -10,6 +10,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 import { Observable } from 'rxjs';
 
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { State } from 'src/app/redux/state.models';
+
 describe('DetailComponent', () => {
   let component: DetailComponent;
   let fixture: ComponentFixture<DetailComponent>;
@@ -19,13 +22,23 @@ describe('DetailComponent', () => {
     getOneById: () => new Observable()
   });
 
+  let store: MockStore;
+  let initialState: State = {
+    userStore: { activeUser: null },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes(routes) ],
       declarations: [ DetailComponent ],
       providers: [
         { provide: YoutubeApiService, useValue: youtubeApiServiceMock},
-        { provide: HttpClient, useValue: HttpClientTestingModule }
+        { provide: HttpClient, useValue: HttpClientTestingModule },
+        provideMockStore({ initialState })
       ]
     })
     .compileComponents();
@@ -35,7 +48,7 @@ describe('DetailComponent', () => {
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
+    store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
     router.initialNavigation();

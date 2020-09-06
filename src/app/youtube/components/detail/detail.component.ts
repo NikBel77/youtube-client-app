@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
 
   public item: IItem | ICustomItem;
   public id: string;
@@ -22,7 +23,6 @@ export class DetailComponent implements OnInit, OnDestroy {
   public isCustom: boolean;
   public thumbnailUrl:  string;
   public statistics: IStatistics | null = null;
-  private subscription: Subscription
 
   constructor(
     private youtubeApiService: YoutubeApiService,
@@ -31,6 +31,13 @@ export class DetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private store: Store,
   ) { }
+
+  private extractImageUrl(item: IItem): string {
+    if (item.snippet.thumbnails.maxres) { return item.snippet.thumbnails.maxres.url; }
+    if (item.snippet.thumbnails.standard) { return item.snippet.thumbnails.standard.url; }
+    if (item.snippet.thumbnails.default) { return item.snippet.thumbnails.default.url; }
+    return '';
+  }
 
   public ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
@@ -41,15 +48,15 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.subscription = this.store.select(getCustomItems)
         .subscribe(
           (items) => {
-            const customItem: ICustomItem = items.find(customItem => customItem.id === this.id);
-            if (!customItem) { return this.router.navigate([paths.NOT_FOUND]); };
+            const customItem: ICustomItem = items.find(item => item.id === this.id);
+            if (!customItem) { return this.router.navigate([paths.NOT_FOUND]); }
 
             this.item = customItem;
             this.publishTime = new Date(this.item.snippet.publishedAt);
             this.thumbnailUrl = this.item.snippet.thumbnail;
           },
           () => this.router.navigate([paths.NOT_FOUND])
-        )
+        );
 
     } else {
 
@@ -69,14 +76,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   }
 
-  private extractImageUrl(item: IItem): string {
-    if(item.snippet.thumbnails.maxres) return item.snippet.thumbnails.maxres.url;
-    if(item.snippet.thumbnails.standard) return item.snippet.thumbnails.standard.url;
-    if(item.snippet.thumbnails.default) return item.snippet.thumbnails.default.url;
-    return '';
-  }
-
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

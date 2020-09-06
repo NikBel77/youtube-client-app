@@ -26,7 +26,7 @@ export class CustomItem implements ICustomItem {
         thumbnail: imageUrl,
         title: title,
         link: link
-      }
+      };
       this.id = Date.now() + '';
     }
   }

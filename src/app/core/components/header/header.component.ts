@@ -83,10 +83,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       );
 
     this.mainInput.nativeElement.onfocus = () => {
-      if(this.router.url !== '/youtube') {
+      if (this.router.url !== '/youtube') {
         this.goToHome();
       }
-    }
+    };
   }
 
   public toggleTypingClass(isTyping: boolean): void {

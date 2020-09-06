@@ -12,7 +12,7 @@ export class SearchItemComponent implements OnInit {
 
   @Input() public item: IItem;
   @Output() public goToDetail
-    :EventEmitter<{ id: string, isCustom: boolean }>
+    : EventEmitter<{ id: string, isCustom: boolean }>
     = new EventEmitter<{ id: string, isCustom: boolean }>();
 
   public title: string;
@@ -20,8 +20,16 @@ export class SearchItemComponent implements OnInit {
 
   constructor() { }
 
+  private extractImageUrl(item: IItem): string {
+    if (!item) return '';
+    if (item.snippet.thumbnails.maxres) { return item.snippet.thumbnails.maxres.url; }
+    if (item.snippet.thumbnails.standard) { return item.snippet.thumbnails.standard.url; }
+    if (item.snippet.thumbnails.default) { return item.snippet.thumbnails.default.url; }
+    return '';
+  }
+
   public ngOnInit(): void {
-    this.title = this.checkTitle(this.item.snippet.title);
+    this.title = this.checkTitle(this.item?.snippet?.title);
     this.thumbnail = this.extractImageUrl(this.item);
   }
 
@@ -31,13 +39,6 @@ export class SearchItemComponent implements OnInit {
       return title.slice(0, MAX_TITLE_LEN) + '...';
     }
     return title;
-  }
-
-  private extractImageUrl(item: IItem): string {
-    if(item.snippet.thumbnails.maxres) return item.snippet.thumbnails.maxres.url;
-    if(item.snippet.thumbnails.standard) return item.snippet.thumbnails.standard.url;
-    if(item.snippet.thumbnails.default) return item.snippet.thumbnails.default.url;
-    return '';
   }
 
 }

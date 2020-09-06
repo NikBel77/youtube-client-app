@@ -43,7 +43,7 @@ export class YoutubeApiService {
       .get<IVideoListResponce>(apiSettings.rootUrl + apiSettings.additionalPathForVideos, { params });
   }
 
-  private exactIdsFromSearchList(searchList: IVideoSearchResponce): string[] {
+  private extractIdsFromSearchList(searchList: IVideoSearchResponce): string[] {
     return searchList.items.map(item => item.id.videoId);
   }
 
@@ -70,7 +70,7 @@ export class YoutubeApiService {
   public fetchVideosByQuery(query: string): Observable<IItem[]> {
     return this.getSearchListByQuery(query)
       .pipe(
-        tap((responce) => this.ids = this.exactIdsFromSearchList(responce)),
+        tap((responce) => this.ids = this.extractIdsFromSearchList(responce)),
         tap(() => this.counter = 1),
         switchMap(() => this.getVideosById(this.ids.slice(0, 10))),
         map(responce => responce.items)

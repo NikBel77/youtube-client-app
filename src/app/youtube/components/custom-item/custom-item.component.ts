@@ -12,7 +12,7 @@ export class CustomItemComponent implements OnInit {
 
   @Input() public item: ICustomItem;
   @Output() public goToDetail
-    :EventEmitter<{ id: string, isCustom: boolean }>
+    : EventEmitter<{ id: string, isCustom: boolean }>
     = new EventEmitter<{ id: string, isCustom: boolean }>();
 
   public title: string;
@@ -20,7 +20,7 @@ export class CustomItemComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.title = this.checkTitle(this.item.snippet.title);
+    this.title = this.checkTitle(this.item?.snippet?.title);
   }
 
   public checkTitle(title: string): string | undefined {
@@ -37,4 +37,3 @@ export class CustomItemComponent implements OnInit {
   }
 
 }
-
