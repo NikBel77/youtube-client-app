@@ -36,7 +36,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.collection$ = this.store.select(getCollection)
 
     this.subscription = this.collection$
-        .subscribe(items => this.hasContent = !!items.length)
+        .subscribe(items => {
+          this.hasContent = !!items.length
+        })
 
     this.subscription = this.filterSettingsService.getFilterSettingsObservable()
       .subscribe((filterSettings) => this.filterSettings = filterSettings);
@@ -60,12 +62,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.youtubeApiService.loadMoreEmmiter.next();
   }
 
+  public goToAdmin() {
+    this.router.navigate([pathes.ADMIN]);
+  }
+
   public toggleSpinner(showSpinner: boolean): void {
     this.isSpinnerShown = showSpinner;
   }
 
-  public goToDetail(id: string): void {
-    this.router.navigate([pathes.MAIN_PAGE, 'detail', id]);
+  public goToDetail({ id, isCustom }): void {
+    this.router.navigate([pathes.MAIN_PAGE, pathes.DETAIL, id, isCustom]);
   }
 
 }

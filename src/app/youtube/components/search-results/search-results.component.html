@@ -2,10 +2,10 @@
 
     <div class="search-result">
         <ng-template ngFor let-item [ngForOf]="collection$ | async | filterCards:filterSettings">
-                <app-search-item *ngIf="!item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
-                </app-search-item>
-                <app-custom-item *ngIf="item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
-                </app-custom-item>
+            <app-search-item *ngIf="!item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+            </app-search-item>
+            <app-custom-item *ngIf="item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+            </app-custom-item>
         </ng-template>
     </div>
 
@@ -18,6 +18,12 @@
     </div>
 
     <div class="placeholder" *ngIf="!hasContent">
-        <h4>Search video on Youtube</h4>
+        <h4>Search Youtube videos</h4>
+    </div>
+
+    <div class="create-card">
+        <button color="accent" mat-raised-button id="logout-btn" (click)="goToAdmin()">
+            create new card
+        </button>
     </div>
 </div>

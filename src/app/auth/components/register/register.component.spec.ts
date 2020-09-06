@@ -21,20 +21,23 @@ describe('RegisterComponent', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes(routes) ],
-      declarations: [ RegisterComponent ],
+      imports: [RouterTestingModule.withRoutes(routes)],
+      declarations: [RegisterComponent],
       providers: [
         RegisterComponent,
         { provide: MatSnackBar, useValue: fakeComponent },
         provideMockStore({ initialState }),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

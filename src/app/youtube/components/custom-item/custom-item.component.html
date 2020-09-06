@@ -1,6 +1,9 @@
 <div *ngIf="item" class="card" [appColorByTime]="item.snippet.publishedAt">
     <div>
-        <img [src]="item.snippet.thumbnail" class="card__thumbnail" alt="thumbnail">
+        <img [src]="item.snippet.thumbnail"
+            class="card__thumbnail"
+            alt="thumbnail"
+            (error)="errorHandle($event)">
     </div>
 
     <div class="card__title">
@@ -10,7 +13,7 @@
     <button
         mat-raised-button color="primary"
         id="more-btn"
-        (click)="goToDetail.emit(item.id)">
+        (click)="goToDetail.emit({ id: item.id, isCustom: true })">
         more...
     </button>
 </div>

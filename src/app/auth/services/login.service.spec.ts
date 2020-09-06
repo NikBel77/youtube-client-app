@@ -19,12 +19,15 @@ describe('LoginService', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes(routes) ],
+      imports: [RouterTestingModule.withRoutes(routes)],
       providers: [
         LoginService,
         provideMockStore({ initialState }),

@@ -21,20 +21,23 @@ describe('LoginComponent', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes(routes) ],
-      declarations: [ LoginComponent ],
+      imports: [RouterTestingModule.withRoutes(routes)],
+      declarations: [LoginComponent],
       providers: [
         LoginComponent,
         { provide: MatSnackBar, useValue: fakeComponent },
         provideMockStore({ initialState }),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

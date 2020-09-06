@@ -16,7 +16,14 @@
 }
 
 .placeholder {
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     color: $text-gray-color;
+}
+
+.create-card {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
 }

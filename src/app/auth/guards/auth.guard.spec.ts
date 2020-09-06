@@ -16,7 +16,10 @@ describe('AuthGuard', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(() => {

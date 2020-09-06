@@ -1,6 +1,6 @@
 <div *ngIf="item" class="card" [appColorByTime]="item.snippet.publishedAt">
     <div>
-        <img [src]="item.snippet.thumbnails.maxres.url" class="card__thumbnail" alt="thumbnail">
+        <img [src]="thumbnail" class="card__thumbnail" alt="thumbnail">
 
         <div class="card__info">
             <app-statistics [statistics]="item.statistics"></app-statistics>
@@ -14,7 +14,7 @@
     <button
         mat-raised-button color="primary"
         id="more-btn"
-        (click)="goToDetail.emit(item.id)">
+        (click)="goToDetail.emit({ id: item.id, isCustom: false })">
         more...
     </button>
 </div>

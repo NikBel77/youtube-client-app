@@ -23,20 +23,23 @@ describe('HeaderComponent', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes(routes) ],
-      declarations: [ HeaderComponent ],
-      providers: [ YoutubeApiService,
+      imports: [RouterTestingModule.withRoutes(routes)],
+      declarations: [HeaderComponent],
+      providers: [YoutubeApiService,
         { provide: HttpClient, useValue: HttpClientTestingModule },
         { provide: MatSnackBar, useValue: fakeComponent },
         provideMockStore({ initialState }),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

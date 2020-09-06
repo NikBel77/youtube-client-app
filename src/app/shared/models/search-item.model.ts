@@ -2,7 +2,7 @@ export interface IItem {
     kind: 'youtube#video';
     etag: string;
     id: string;
-    snippet: ISnipet;
+    snippet: ISnippet;
     statistics: IStatistics;
 }
 
@@ -37,7 +37,7 @@ export interface IStatistics {
     commentCount: string;
 }
 
-export interface ISnipet {
+export interface ISnippet {
     publishedAt: string;
     channelId: string;
     title: string;

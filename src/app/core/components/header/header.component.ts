@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('mainInput') public mainInput: ElementRef<HTMLInputElement>;
 
   public isFilterBlockVisible: boolean = false;
-
   public activeUser: User | null = null;
   public isSpinnerShown: boolean = false;
 
@@ -45,10 +44,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.store.select( getActiveUser )
-    .subscribe(
-      (user) => this.activeUser = user
-    );
+    this.store.select(getActiveUser)
+      .subscribe(
+        (user) => this.activeUser = user
+      );
   }
 
   public ngAfterViewInit(): void {
@@ -82,6 +81,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           }
         }
       );
+
+    this.mainInput.nativeElement.onfocus = () => {
+      if(this.router.url !== '/youtube') {
+        this.goToHome();
+      }
+    }
   }
 
   public toggleTypingClass(isTyping: boolean): void {
@@ -111,10 +116,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public goToHome(): void {
     this.router.navigate([paths.MAIN_PAGE]);
-  }
-
-  public goToAdmin(): void {
-    this.router.navigate([paths.ADMIN]);
   }
 
 }

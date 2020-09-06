@@ -21,12 +21,15 @@ describe('SearchResultsComponent', () => {
 
   let initialState: State = {
     userStore: { activeUser: null },
-    collectionStore: { collection: [] },
+    collectionStore: {
+      items: [],
+      customItems: []
+    },
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes(routes) ],
+      imports: [RouterTestingModule.withRoutes(routes)],
       declarations: [
         SearchResultsComponent,
         FilterCardsPipe
@@ -37,7 +40,7 @@ describe('SearchResultsComponent', () => {
         provideMockStore({ initialState }),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
