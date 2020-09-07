@@ -21,7 +21,7 @@ export class SearchItemComponent implements OnInit {
   constructor() { }
 
   private extractImageUrl(item: IItem): string {
-    if (!item) return '';
+    if (!item) { return ''; }
     if (item.snippet.thumbnails.maxres) { return item.snippet.thumbnails.maxres.url; }
     if (item.snippet.thumbnails.standard) { return item.snippet.thumbnails.standard.url; }
     if (item.snippet.thumbnails.default) { return item.snippet.thumbnails.default.url; }

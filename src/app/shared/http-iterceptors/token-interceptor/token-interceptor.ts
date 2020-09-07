@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { apiSettings } from '../../../core/models/youtube-api.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    intercept(request: HttpRequest<null>, next: HttpHandler) {
+    public intercept(request: HttpRequest<null>, next: HttpHandler)
+        : Observable<HttpEvent<HttpRequest<null>>> {
         const keyRequest: HttpRequest<null> = request.clone({
             setParams: {
                 'key': apiSettings.apiKey
