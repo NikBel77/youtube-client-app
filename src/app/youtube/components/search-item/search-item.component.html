@@ -1,0 +1,23 @@
+<div *ngIf="item" class="card" [appColorByTime]="item.snippet.publishedAt">
+    <div>
+        <img [src]="item.snippet.thumbnails.medium.url" class="card__thumbnail" alt="thumbnail">
+
+        <div class="card__info">
+            <app-statistics *ngFor="let stat of statisticsMap" [value]="stat.value" [icon]="stat.icon">
+            </app-statistics>
+        </div>
+    </div>
+
+    <div class="card__title">
+        <h4 id="card-title">{{title}}</h4>
+        <!-- this teg below only for debag -->
+        <p>{{debugDate}}</p>
+    </div>
+
+    <button
+        mat-raised-button color="primary"
+        id="more-btn"
+        (click)="goToDetail()">
+        more...
+    </button>
+</div>

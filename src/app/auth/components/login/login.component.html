@@ -1,0 +1,25 @@
+<div class="login">
+    <h4>Login</h4>
+
+    <form class="login__form">
+        <div class="login__fild">
+            <label>login</label>
+            <input type="text" #loginName>
+        </div>
+
+        <div class="login__fild">
+            <label>password</label>
+            <input type="password" #loginPassword>
+        </div>
+    </form>
+
+    <div class="login__controls">
+        <button mat-button color="primary" routerLink="reg">Registration</button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="handleLogin(loginName.value, loginPassword.value)">
+            Login
+        </button>
+    </div>
+</div>
