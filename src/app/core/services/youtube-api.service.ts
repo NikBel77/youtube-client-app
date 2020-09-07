@@ -24,7 +24,6 @@ export class YoutubeApiService {
 
   private getSearchListByQuery(query: string): Observable<IVideoSearchResponce> {
     const params: HttpParams = new HttpParams()
-      .set('key', apiSettings.apiKey)
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', '40')
@@ -36,7 +35,6 @@ export class YoutubeApiService {
   private getVideosById(idArray: string[]): Observable<IVideoListResponce> {
     const ids: string = idArray.join();
     const params: HttpParams = new HttpParams()
-      .set('key', apiSettings.apiKey)
       .set('id', ids)
       .set('part', 'snippet,statistics');
     return this.http

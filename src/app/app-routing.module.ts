@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 
 import paths from './constants/router.paths';
 
 export const routes: Routes = [
-  { path: '', redirectTo: paths.MAIN_PAGE, pathMatch: 'full'},
+  { path: '', redirectTo: paths.MAIN_PAGE, pathMatch: 'full' },
   {
     path: paths.MAIN_PAGE,
     canActivate: [AuthGuard],
@@ -28,7 +28,11 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
