@@ -3,6 +3,8 @@ import { User } from '../../shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { setActiveUser } from '../../redux/actions/user.actions';
 
+import sha256 from 'crypto-js/sha256';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +13,8 @@ export class UserService {
   constructor(private store: Store) {
     this.tryLoginFromSession();
   }
+
+  private encode = (msg: string): string => sha256(msg).toString()
 
   private getUsersFromLocalStorage(): User[] | null {
     if (!window.localStorage.length) { return null; }
@@ -29,9 +33,12 @@ export class UserService {
     const user: User = JSON.parse(window.sessionStorage.getItem('user'));
     if (!user.name || !user.password) { return false; }
 
-    const fromLogIn: User | null = this.loginUser(user.name, user.password);
-    if (!!fromLogIn) {
-      this.store.dispatch(setActiveUser({ user }));
+    const users: User[] = this.getUsersFromLocalStorage();
+    const activeUser: User | undefined = users.find(({ name, password }) => {
+      return name === user.name && password === user.password;
+    })
+    if (activeUser) {
+      this.store.dispatch(setActiveUser({ user: activeUser }));
       return true;
     }
     return false;
@@ -45,7 +52,7 @@ export class UserService {
   public saveUserToLocalStorage(name: string, email: string, psw: string): boolean {
     if (!name || !email || !psw) { return false; }
 
-    const user: User = new User(name, email, psw);
+    const user: User = new User(name, email, this.encode(psw));
     const users: User[] | null = this.getUsersFromLocalStorage();
 
     if (!users) {
@@ -66,8 +73,9 @@ export class UserService {
     if (!users) { return null; }
 
     const currentUser: User | undefined = users.find((user) => user.name === name);
+
     if (!currentUser) { return null; }
-    if (currentUser.password !== password) { return null; }
+    if (currentUser.password !== this.encode(password)) { return null; }
 
     this.saveSession(currentUser);
     this.store.dispatch(setActiveUser({ user: currentUser }));
