@@ -12,7 +12,7 @@ export class LoginComponent {
   constructor(private loginService: LoginService) { }
 
   public handleLogin(name: string, pasword: string): void {
-    const user: User | null = this.loginService.tryLogin(name, pasword);
+    this.loginService.tryLogin(name, pasword);
   }
 
 }

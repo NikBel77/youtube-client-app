@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { getCustomItems } from '../../../redux/selectors/collection.selectors';
 import { ICustomItem } from 'src/app/shared/models/сustom-item.model';
 import { Subscription } from 'rxjs';
+import { PLACEHOLDER } from '../../../constants/common';
 
 @Component({
   selector: 'app-detail',
@@ -41,7 +42,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
-    this.isCustom = this.route.snapshot.params.isCustom === 'true';
+    this.isCustom = this.route.snapshot.url.some(url => url.path === paths.CUSTOM);
 
     if (this.isCustom) {
 
@@ -85,7 +86,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   public handleLoadError(img: HTMLImageElement): void {
-    img.parentElement.remove();
+    img.src = PLACEHOLDER;
   }
 
 }

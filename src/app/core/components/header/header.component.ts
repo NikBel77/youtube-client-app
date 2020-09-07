@@ -5,7 +5,6 @@ import { User } from 'src/app/shared/models/user.model';
 import { YoutubeApiService } from '../../services/youtube-api.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, switchMap, filter, catchError } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import paths from '../../../constants/router.paths';
 import { setNewCollection } from '../../../redux/actions/collection.actions';
@@ -13,6 +12,7 @@ import { getActiveUser } from '../../../redux/selectors/user.selectors';
 import { setActiveUser } from '../../../redux/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { IItem } from 'src/app/shared/models/search-item.model';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -34,13 +34,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private router: Router,
     private youtubeApiService: YoutubeApiService,
     private store: Store,
-    private snackBar: MatSnackBar) { }
+    private snackBar: SnackBarService) { }
 
   private handleHttpError(error: HttpErrorResponse): void {
     this.toggleSpinner(false);
-    this.snackBar.open(`fail to load from youtube: code ${error.status}`, 'close', {
-      duration: 5000
-    });
+    this.snackBar.open(`Fail to load from youtube: code ${error.status}`);
   }
 
   public ngOnInit(): void {

@@ -26,10 +26,9 @@ export class RegisterComponent implements OnInit {
 
     [name, email, psw] = elements.map(input => input.value);
     if (isAllowed) {
-      const user: User | null = this.loginService.tryRegister(new User(name, email, psw));
-      if (!user) {
-        this.loginService.openSnackBar('all fields must be filled');
-      }
+      this.loginService.tryRegister(new User(name, email, psw));
+    } else {
+      this.loginService.openSnackBar('All fields must be filled');
     }
   }
 

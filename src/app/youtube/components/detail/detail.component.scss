@@ -19,6 +19,7 @@
     }
 
     &__card {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -66,6 +67,16 @@
             color: $text-gray-color;
             font-size: 12px;
         }
+    }
+
+    &__label {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: $warn-color;
+        color: white;
+        padding: 5px;
+        border-top-right-radius: inherit;
     }
 
     &__description {

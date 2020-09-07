@@ -4,7 +4,8 @@ enum paths {
     DETAIL = 'detail',
     REGISTER = 'register',
     ADMIN = 'admin',
-    NOT_FOUND = 'not-found'
+    NOT_FOUND = 'not-found',
+    CUSTOM = 'custom'
 }
 
 export default paths;

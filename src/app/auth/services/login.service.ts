@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '../../shared/services/snack-bar.service';
 import { User } from 'src/app/shared/models/user.model';
 import paths from 'src/app/constants/router.paths';
 
@@ -13,18 +13,16 @@ export class LoginService {
   constructor(
     private userService: UserService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: SnackBarService) { }
 
   public openSnackBar(massage: string): void {
-    this.snackBar.open(massage, '', {
-      duration: 2000
-    });
+    this.snackBar.open(massage);
   }
 
   public tryLogin(name: string, psw: string): User | null {
     const user: User | null = this.userService.loginUser(name, psw);
     if (!user) {
-      this.openSnackBar('incorrect name or password');
+      this.openSnackBar('Incorrect name or password');
       return null;
     } else {
       this.openSnackBar(`loign as ${name}`);
@@ -37,10 +35,10 @@ export class LoginService {
     const { name, email, password } = user;
     const isRegister: boolean = this.userService.saveUserToLocalStorage(name, email, password);
     if (!isRegister) {
-      this.openSnackBar(`user: ${name} has alredy registered`);
+      this.openSnackBar(`User: ${name} has already registered`);
       return null;
     } else {
-      this.openSnackBar(`user ${name} registered`);
+      this.openSnackBar(`User ${name} registered`);
       this.userService.loginUser(name, password);
       this.router.navigate([paths.MAIN_PAGE]);
       return user;

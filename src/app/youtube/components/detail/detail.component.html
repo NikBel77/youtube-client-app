@@ -4,6 +4,9 @@
     </button>
 
     <div class="detail__card">
+        <div class="detail__label" *ngIf="isCustom">
+            <span>Custom</span>
+        </div>
 
         <div class="detail__banner">
             <img #img [src]="thumbnailUrl" alt="banner" (error)="handleLoadError(img)">

@@ -36,6 +36,16 @@
         margin-bottom: 4px;
     }
 
+    &__label {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: $warn-color;
+        color: white;
+        padding: 5px;
+        border-bottom-left-radius: inherit;
+    }
+
     #card-title {
         font-weight: 500;
         padding: 0;

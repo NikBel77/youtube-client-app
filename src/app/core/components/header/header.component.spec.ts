@@ -8,8 +8,7 @@ import { routes } from '../../../app-routing.module';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { YoutubeApiService } from '../../services/youtube-api.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
 
@@ -35,7 +34,7 @@ describe('HeaderComponent', () => {
       declarations: [HeaderComponent],
       providers: [YoutubeApiService,
         { provide: HttpClient, useValue: HttpClientTestingModule },
-        { provide: MatSnackBar, useValue: fakeComponent },
+        { provide: SnackBarService, useValue: fakeComponent },
         provideMockStore({ initialState }),
       ]
     })

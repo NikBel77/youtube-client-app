@@ -1,5 +1,6 @@
 <div class="register">
     <h4>Registration</h4>
+    <p class="register__hint">All data save to local storage</p>
 
     <form class="register__form">
         <div class="register__fild">
@@ -10,11 +11,13 @@
         <div class="register__fild">
             <label>mail</label>
             <input type="email" #regMail [appWarningBorder]="'EMAIL'">
+            <p class="register__hint">example: mail@ya.ru</p>
         </div>
 
         <div class="register__fild">
             <label>password</label>
             <input type="password" #regPassword [appWarningBorder]="'PSW'">
+            <p class="register__hint">password must contain numbers and letters in upper and lower case</p>
         </div>
     </form>
 

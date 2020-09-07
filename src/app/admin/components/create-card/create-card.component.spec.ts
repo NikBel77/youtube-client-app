@@ -3,11 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateCardComponent } from './create-card.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 describe('CreateCardComponent', () => {
   let component: CreateCardComponent;
   let fixture: ComponentFixture<CreateCardComponent>;
   let store: MockStore;
+  let fakeSnakBar: object = {}
 
   let initialState: State = {
     userStore: { activeUser: null },
@@ -20,7 +22,10 @@ describe('CreateCardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateCardComponent ],
-      providers: [provideMockStore({ initialState })]
+      providers: [
+        { provide: SnackBarService, useValue: fakeSnakBar },
+        provideMockStore({ initialState })
+      ]
     })
     .compileComponents();
   }));

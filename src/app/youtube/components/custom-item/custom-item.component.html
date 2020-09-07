@@ -1,4 +1,8 @@
 <div *ngIf="item" class="card" [appColorByTime]="item.snippet.publishedAt">
+    <div class="card__label">
+        Custom
+    </div>
+
     <div>
         <img [src]="item.snippet.thumbnail"
             class="card__thumbnail"

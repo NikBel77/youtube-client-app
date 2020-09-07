@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { routes } from '../../app-routing.module';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '../../shared/services/snack-bar.service';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
@@ -31,7 +31,7 @@ describe('LoginService', () => {
       providers: [
         LoginService,
         provideMockStore({ initialState }),
-        { provide: MatSnackBar, useValue: fakeComponent }
+        { provide: SnackBarService, useValue: fakeComponent }
       ]
     });
     service = TestBed.inject(LoginService);

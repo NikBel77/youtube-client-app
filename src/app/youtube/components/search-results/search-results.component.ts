@@ -3,7 +3,7 @@ import { IFilterSettings } from '../../../shared/models/filter-settings.model';
 import { FilterSettingsService } from 'src/app/core/services/filter-settings.service';
 import { YoutubeApiService } from 'src/app/core/services/youtube-api.service';
 import { Router } from '@angular/router';
-import pathes from '../../../constants/router.paths';
+import paths from '../../../constants/router.paths';
 import { Store } from '@ngrx/store';
 import { getCollection } from '../../../redux/selectors/collection.selectors';
 import { pushToCollection } from '../../../redux/actions/collection.actions';
@@ -62,7 +62,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   public goToAdmin(): void {
-    this.router.navigate([pathes.ADMIN]);
+    this.router.navigate([paths.ADMIN]);
   }
 
   public toggleSpinner(showSpinner: boolean): void {
@@ -71,7 +71,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public goToDetail(params: { id: string, isCustom: boolean }): void {
     const { id, isCustom } = params;
-    this.router.navigate([pathes.MAIN_PAGE, pathes.DETAIL, id, isCustom]);
+    if (isCustom) {
+      this.router.navigate([paths.MAIN_PAGE, paths.DETAIL, paths.CUSTOM , id]);
+    } else {
+      this.router.navigate([paths.MAIN_PAGE, paths.DETAIL, id]);
+    }
   }
 
 }
