@@ -1,0 +1,28 @@
+@import '../../../themes/variables.scss';
+
+.filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color;
+    padding: 10px;
+    font-size: 12px;
+    color: #929292;
+
+    &__criterion {
+        color: $primary-color;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    span {
+        margin-right: 20px;
+    }
+
+    #filter-input {
+        outline: none;
+        border: none;
+        font-size: 12px;
+    }
+
+}

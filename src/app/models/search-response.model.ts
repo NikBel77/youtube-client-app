@@ -1,12 +1,13 @@
-import IItem from './search-item.model'
+import { IItem } from './search-item.model';
 
-export default interface IResponce {
-    kind: string,
-    etag: string,
-    pageInfo: {
-        totalResults: number,
-        resultsPerPage: number,
-    },
-    items: Array<IItem>,
+export interface IResponce {
+    kind: string;
+    etag: string;
+    pageInfo: IPageInfo;
+    items: Array<IItem>;
 }
 
+export interface IPageInfo {
+    totalResults: number;
+    resultsPerPage: number;
+}
