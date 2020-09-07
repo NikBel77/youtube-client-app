@@ -1,0 +1,6 @@
+<div class="statistics">
+    <ng-template ngFor let-item [ngForOf]="statisticsMap">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.value }}</span>
+    </ng-template>
+</div>

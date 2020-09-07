@@ -1,0 +1,45 @@
+<header>
+    <div class="control-panel">
+
+        <div class="search">
+
+            <img (click)="goToHome()" class="search__logo" src="../../../assets/icons/logo.svg">
+
+            <div class="search__panel">
+                <input
+                    class="search__input"
+                    placeholder="What are you want to find out?"
+                    #mainInput
+                    [disabled]="!activeUserName"
+                />
+
+                <div class="spinner-wrapper">
+                    <mat-spinner diameter="22" *ngIf="isSpinnerShown">
+                    </mat-spinner>
+                </div>
+
+                <button color="primary" mat-raised-button id="setting-btn"
+                    (click)="isFilterBlockVisible = !isFilterBlockVisible">
+                    <img src="../../../assets/icons/set.svg">
+                </button>
+            </div>
+
+        </div>
+
+        <div class="user">
+
+            <span class="user__name" *ngIf="!!activeUserName">
+                {{ activeUserName.name }}
+            </span>
+            <button color="primary" mat-raised-button id="user-btn" (click)="goToAuth()">
+                <mat-icon>account_box</mat-icon>
+            </button>
+            <button *ngIf="!!activeUserName" color="primary" mat-button id="logout-btn" (click)="logOut()">
+                Log out
+            </button>
+
+        </div>
+    </div>
+</header>
+
+<app-filter *ngIf="isFilterBlockVisible"></app-filter>

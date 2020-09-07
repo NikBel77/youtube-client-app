@@ -1,7 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { SearchResultsComponent } from './youtube/components/search-results/search-results.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { SingInComponent } from './auth/components/sing-in/sing-in.component';
+import { RegisterComponent } from './auth/components/register/register.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { DetailComponent } from './youtube/components/detail/detail.component';
 
-const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'home', component: SearchResultsComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:id', component: DetailComponent, canActivate: [AuthGuard] },
+  {
+    path: 'auth',
+    component: SingInComponent,
+    children: [
+      { path: '', component: LoginComponent, pathMatch: 'full' },
+      { path: 'reg', component: RegisterComponent }
+    ]
+  },
+  { path: '**', component: NotFoundComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

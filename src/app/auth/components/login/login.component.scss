@@ -1,0 +1,45 @@
+@import '../../../../themes/variables.scss';
+
+.login {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        color: $text-gray-color;
+    }
+
+    &__fild {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        & label {
+            margin-left: 8px;
+        }
+
+        & input {
+            margin-top: 4px;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid;
+            border-color: #00000000;
+            border-radius: 2px;
+            padding-left: 4px;
+            padding-top: 2px;
+            min-height: 24px;
+            font-size: 18px;
+            background-color: $background-light-color;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+        button {
+            line-height: 30px;
+            padding: 0 10px;
+            min-width: 26px;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="search-result">
+        <ng-template ngFor let-item [ngForOf]="items | filterCards:filterSettings">
+            <app-search-item [item]="item" (goToDetail)="goToDetail($event)"></app-search-item>
+        </ng-template>
+    </div>
+
+    <div *ngIf="items.length" class="more-button">
+        <button *ngIf="!isSpinnerShown" mat-button color="warn" (click)="loadMore()">
+            Load more videos
+        </button>
+
+        <mat-spinner *ngIf="isSpinnerShown" diameter="30" color="warn"></mat-spinner>
+    </div>
+
+    <div class="placeholder" *ngIf="!items.length">
+        <h4>Search video on Youtube</h4>
+    </div>
+</div>

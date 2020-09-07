@@ -1,0 +1,21 @@
+<div class="filter">
+    <div class="filter__panel">
+        <span class="filter__label">Sorting by:</span>
+        <div class="filter__criterion-block">
+            <span class="filter__criterion" (click)="setFilter(filtersMap.date)">date</span>
+            <mat-icon>
+                {{getCurrentArrowPos(filtersMap.date)}}
+            </mat-icon>
+        </div>
+        <div class="filter__criterion-block">
+            <span class="filter__criterion" (click)="setFilter(filtersMap.view)">count of views</span>
+            <mat-icon>
+                {{getCurrentArrowPos(filtersMap.view)}}
+            </mat-icon>
+        </div>
+        <div class="filter__criterion-block">
+            <span class="filter__criterion" (click)="setKeyWord(input)">by word sentence</span>
+        </div>
+        <input id="filter-input" #input/>
+    </div>
+</div>
