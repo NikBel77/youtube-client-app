@@ -40,8 +40,4 @@ export class FilterSettingsService {
     return this.filterStream$;
   }
 
-  public getFiltersMap(): IFilters {
-    return this.filtersMap;
-  }
-
 }

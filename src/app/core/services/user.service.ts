@@ -14,7 +14,7 @@ export class UserService {
     this.tryLoginFromSession();
   }
 
-  private encode = (msg: string): string => sha256(msg).toString()
+  private encode = (msg: string): string => sha256(msg).toString();
 
   private getUsersFromLocalStorage(): User[] | null {
     if (!window.localStorage.length) { return null; }
@@ -36,7 +36,7 @@ export class UserService {
     const users: User[] = this.getUsersFromLocalStorage();
     const activeUser: User | undefined = users.find(({ name, password }) => {
       return name === user.name && password === user.password;
-    })
+    });
     if (activeUser) {
       this.store.dispatch(setActiveUser({ user: activeUser }));
       return true;

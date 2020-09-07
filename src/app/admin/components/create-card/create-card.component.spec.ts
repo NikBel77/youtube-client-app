@@ -9,7 +9,7 @@ describe('CreateCardComponent', () => {
   let component: CreateCardComponent;
   let fixture: ComponentFixture<CreateCardComponent>;
   let store: MockStore;
-  let fakeSnakBar: object = {}
+  let fakeSnakBar: object = {};
 
   let initialState: State = {
     userStore: { activeUser: null },
