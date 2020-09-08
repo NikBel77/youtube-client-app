@@ -41,7 +41,7 @@ describe('UserService', () => {
   });
 
   it('should save user to LocalStorage', () => {
-    const isLogin = service.saveUserToLocalStorage('name', 'mail@ya.ru', '1234');
+    const isLogin: boolean = service.saveUserToLocalStorage('name', 'mail@ya.ru', '1234');
     expect(isLogin).toBeTruthy();
   });
 
