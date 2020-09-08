@@ -22,8 +22,12 @@
                 <h5>Description:</h5>
                 <p>{{ item.snippet.description }}</p>
             </div>
-
+            
             <app-statistics *ngIf="statistics" [statistics]="statistics"></app-statistics>
+
+            <div>
+                <a [href]="link" target="blank">{{ link }}</a>
+            </div>
         </div>
 
     </div>

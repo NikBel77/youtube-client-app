@@ -24,6 +24,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   public isCustom: boolean;
   public thumbnailUrl:  string;
   public statistics: IStatistics | null = null;
+  public link: string;
 
   constructor(
     private youtubeApiService: YoutubeApiService,
@@ -55,6 +56,7 @@ export class DetailComponent implements OnInit, OnDestroy {
             this.item = customItem;
             this.publishTime = new Date(this.item.snippet.publishedAt);
             this.thumbnailUrl = this.item.snippet.thumbnail;
+            this.link = this.item.snippet.link;
           },
           () => this.router.navigate([paths.NOT_FOUND])
         );
@@ -69,6 +71,7 @@ export class DetailComponent implements OnInit, OnDestroy {
             this.publishTime = new Date(this.item?.snippet?.publishedAt);
             this.thumbnailUrl = this.extractImageUrl(this.item);
             this.statistics = this.item.statistics;
+            this.link = `https://www.youtube.com/watch?v=${this.item.id}`;
           }),
           () => this.router.navigate([paths.NOT_FOUND])
         );
