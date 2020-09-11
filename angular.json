@@ -129,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "youtube-client-app"
+    }
+  },
+  "defaultProject": "youtube-client-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

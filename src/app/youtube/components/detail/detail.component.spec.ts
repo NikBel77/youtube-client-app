@@ -51,7 +51,6 @@ describe('DetailComponent', () => {
     store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
-    router.initialNavigation();
   });
 
   it('should create', () => {

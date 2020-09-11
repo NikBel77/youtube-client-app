@@ -9,12 +9,15 @@ import { SnackBarService } from '../../shared/services/snack-bar.service';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
+import { User } from 'src/app/shared/models/user.model';
 
 describe('LoginService', () => {
   let service: LoginService;
   let location: Location;
   let router: Router;
-  let fakeComponent: object = {};
+  let fakeComponent: object = {
+    open: () => {}
+  };
   let store: MockStore;
 
   let initialState: State = {
@@ -38,10 +41,27 @@ describe('LoginService', () => {
     store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
-    router.initialNavigation();
-  });
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+   });
+  
+  afterEach(() => {
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+  })
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should retun null with incorrect name and psw', () => {
+    const isLogin: User | null = service.tryLogin('any name', '1234');
+    expect(isLogin).toBeNull();
+  });
+  
+  it('tryRegister should return User', () => {
+    const user : User = new User('name', 'mail', 'psw')
+    const isLogin: User | null = service.tryRegister(user);
+    expect(isLogin).toEqual(user);
   });
 });

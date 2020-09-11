@@ -9,7 +9,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import paths from '../../../constants/router.paths';
 import { setNewCollection } from '../../../redux/actions/collection.actions';
 import { getActiveUser } from '../../../redux/selectors/user.selectors';
-import { setActiveUser } from '../../../redux/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { IItem } from 'src/app/shared/models/search-item.model';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
@@ -104,7 +103,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   public logOut(): void {
     this.userServise.logOut();
-    this.store.dispatch(setActiveUser({ user: null }));
     this.router.navigate([paths.AUTH_PAGE]);
   }
 

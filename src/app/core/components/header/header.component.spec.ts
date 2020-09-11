@@ -11,6 +11,8 @@ import { YoutubeApiService } from '../../services/youtube-api.service';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { State } from 'src/app/redux/state.models';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -37,8 +39,7 @@ describe('HeaderComponent', () => {
         { provide: SnackBarService, useValue: fakeComponent },
         provideMockStore({ initialState }),
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -49,10 +50,14 @@ describe('HeaderComponent', () => {
     store = TestBed.inject(MockStore);
     location = TestBed.get(Location);
     router = TestBed.get(Router);
-    router.initialNavigation();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create search input', () => {
+    let el: DebugElement = fixture.debugElement.query(By.css('.search__input'));
+    expect(el).toBeTruthy();
   });
 });
