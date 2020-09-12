@@ -6,6 +6,6 @@ Youtube-client-app is application for viewing information about videos on YouTub
 
 ## Deploy
 
-[netlify](https://youtubeclientapp.netlify.app/auth)
+[netlify](https://youtubeclientapp.netlify.app/auth) current task version
 
 [firebase](https://yt-client-app.web.app/) latest version whith firebase auth, and firebase realtime database support
