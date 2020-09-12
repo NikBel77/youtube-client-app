@@ -4,7 +4,7 @@ import { apiSettings } from 'src/app/core/models/youtube-api.model';
 
 describe('TokenInterceptor', () => {
   const next: HttpHandler = jasmine.createSpyObj(['handle']);
-  const request: HttpRequest<null> = jasmine.createSpyObj(['clone'])
+  const request: HttpRequest<null> = jasmine.createSpyObj(['clone']);
   let interceptor: TokenInterceptor = new TokenInterceptor();
 
   it('should create an instance', () => {
@@ -13,11 +13,11 @@ describe('TokenInterceptor', () => {
 
   it('intersept should call clone and handle methods', () => {
     interceptor.intercept(request, next);
-    
+
     expect(next.handle).toHaveBeenCalled();
     expect(request.clone).toHaveBeenCalled();
     expect(request.clone).toHaveBeenCalledWith({
       setParams: { 'key': apiSettings.apiKey }
     });
-  })
+  });
 });

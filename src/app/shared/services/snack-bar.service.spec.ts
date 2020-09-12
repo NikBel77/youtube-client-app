@@ -25,5 +25,5 @@ describe('SnackBarService', () => {
     expect(fakeSnakBar.open).toHaveBeenCalledWith('message', 'close', {
       duration: 2000
     });
-  })
+  });
 });

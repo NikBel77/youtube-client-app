@@ -48,6 +48,6 @@ describe('AuthGuard', () => {
 
     obs.subscribe(
       (value) => expect(value).toBeInstanceOf(UrlTree)
-    )
-  })
+    );
+  });
 });

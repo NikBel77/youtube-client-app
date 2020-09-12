@@ -44,11 +44,11 @@ describe('LoginService', () => {
     window.localStorage.clear();
     window.sessionStorage.clear();
    });
-  
+
   afterEach(() => {
     window.localStorage.clear();
     window.sessionStorage.clear();
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -58,9 +58,9 @@ describe('LoginService', () => {
     const isLogin: User | null = service.tryLogin('any name', '1234');
     expect(isLogin).toBeNull();
   });
-  
+
   it('tryRegister should return User', () => {
-    const user : User = new User('name', 'mail', 'psw')
+    const user: User = new User('name', 'mail', 'psw');
     const isLogin: User | null = service.tryRegister(user);
     expect(isLogin).toEqual(user);
   });
