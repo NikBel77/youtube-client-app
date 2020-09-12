@@ -59,7 +59,7 @@
     grid-area: user;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-start;
 
     &__name {
         font-size: 18px;

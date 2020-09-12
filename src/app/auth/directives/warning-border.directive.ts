@@ -24,10 +24,8 @@ export class WarningBorderDirective {
         }
       }
       case 'PSW': {
-        if (this.checkPassword(value) >= 3) {
+        if (this.checkPassword(value)) {
           return this.colors.allowed;
-        } else if (this.checkPassword(value) >= 2) {
-          return this.colors.danger;
         } else {
           return this.colors.warning;
         }
@@ -53,16 +51,9 @@ export class WarningBorderDirective {
     return regExpOnlyString.test(user);
   }
 
-  private checkPassword(psw: string): number {
-    let count: number;
-    count = 0;
-
-    if (psw.length < 6) { return count; }
-    count += /[a-z]/.test(psw) ? 1 : 0;
-    count += /[A-Z]/.test(psw) ? 1 : 0;
-    count += /\d/.test(psw) ? 1 : 0;
-
-    return count;
+  private checkPassword(psw: string): boolean {
+    if (psw.length < 6) { return false; }
+    return true;
   }
 
   @HostListener('input') public onInput(): void {
