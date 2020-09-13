@@ -18,4 +18,5 @@ install:
   - npm install
 
 script:
-  - npm run test
+  - npm run test-by-ci
+  - npm run lint

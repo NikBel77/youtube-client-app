@@ -1,0 +1,29 @@
+@import '../../../../themes/variables.scss';
+
+.container {
+    margin: 10px 30px;
+}
+
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.more-button {
+    display: flex;
+    justify-content: center;
+}
+
+.placeholder {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: $text-gray-color;
+}
+
+.create-card {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}

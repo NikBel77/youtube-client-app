@@ -1,0 +1,11 @@
+.statistics {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    span {
+        margin-right: 8px;
+        margin-left: 4px;
+        font-size: 14px
+    }
+}

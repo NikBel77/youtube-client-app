@@ -1,0 +1,38 @@
+<div class="detail" *ngIf="item">
+    <button mat-raised-button color="primary" id="back-btn" (click)="goBack()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+
+    <div class="detail__card">
+        <div class="detail__label" *ngIf="isCustom">
+            <span>Custom</span>
+        </div>
+
+        <div class="detail__banner">
+            <img #img [src]="thumbnailUrl" alt="banner" (error)="handleLoadError(img)">
+        </div>
+
+        <div class="detail__info" [appColorByTime]="item.snippet.publishedAt">
+            <div class="detail__title">
+                <h3>{{ item.snippet.title }}</h3>
+                <span class="detail__time">{{ publishTime.toDateString() }}</span>
+            </div>
+
+            <div class="detail__description">
+                <h5>Description:</h5>
+                <p>{{ item.snippet.description }}</p>
+            </div>
+            
+            <app-statistics *ngIf="statistics" [statistics]="statistics"></app-statistics>
+
+            <div>
+                <a [href]="link" target="blank">{{ link }}</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="spinner-wrapper" *ngIf="!item">
+    <mat-spinner></mat-spinner>
+</div>

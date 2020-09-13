@@ -1,0 +1,42 @@
+@import '../../../../themes/variables.scss';
+
+.filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color;
+    color: $text-gray-color;
+    padding: 10px;
+    font-size: 12px;
+
+    &__panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__criterion-block {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+    }
+
+    &__criterion {
+        color: $primary-color;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    &__label {
+        margin-right: 10px;
+    }
+
+    #filter-input {
+        outline: none;
+        border: none;
+        font-size: 12px;
+        margin-left: 10px;
+        padding-left: 2px;
+    }
+
+}

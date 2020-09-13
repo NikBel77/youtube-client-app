@@ -28,9 +28,15 @@
               "src/assets"
             ],
             "styles": [
+              {
+                "input": "src/themes/blue-gray-theme.scss"
+              },
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "crypto-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "youtube-client-app"
+    }
+  },
+  "defaultProject": "youtube-client-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

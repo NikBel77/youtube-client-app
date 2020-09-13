@@ -1,0 +1,29 @@
+<div class="container">
+
+    <div class="search-result">
+        <ng-template ngFor let-item [ngForOf]="collection$ | async | filterCards:filterSettings">
+            <app-search-item *ngIf="!item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+            </app-search-item>
+            <app-custom-item *ngIf="item.isCustom" [item]="item.item" (goToDetail)="goToDetail($event)">
+            </app-custom-item>
+        </ng-template>
+    </div>
+
+    <div *ngIf="hasContent" class="more-button">
+        <button *ngIf="!isSpinnerShown" mat-button color="warn" (click)="loadMore()">
+            Load more videos
+        </button>
+
+        <mat-spinner *ngIf="isSpinnerShown" diameter="30" color="warn"></mat-spinner>
+    </div>
+
+    <div class="placeholder" *ngIf="!hasContent">
+        <h4>Search Youtube videos</h4>
+    </div>
+
+    <div class="create-card">
+        <button color="accent" mat-raised-button id="logout-btn" (click)="goToAdmin()">
+            create new card
+        </button>
+    </div>
+</div>

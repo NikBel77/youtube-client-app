@@ -1,0 +1,36 @@
+<div class="admin">
+    <h4>Create new card</h4>
+
+    <form class="admin__form" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+        <div class="admin__fild">
+            <label>title</label>
+            <input type="text" formControlName="title">
+        </div>
+
+        <div class="admin__fild">
+            <label>description</label>
+            <input type="text" formControlName="description">
+        </div>
+
+        <div class="admin__fild">
+            <label>image url</label>
+            <input type="text" formControlName="imageUrl">
+        </div>
+
+        <div class="admin__fild">
+            <label>link to video</label>
+            <input type="text" formControlName="link">
+        </div>
+
+        <div class="admin__controls">
+            <button
+                [disabled]="!cardForm.valid"
+                mat-raised-button
+                color="primary"
+                type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+
+</div>
